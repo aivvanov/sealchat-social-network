@@ -1,0 +1,17 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: auto 90%;
+}
+
+.dialogs .dialog_items {
+    padding: 10px;
+}
+
+.dialog_items.active,
+.dialog_items:hover {
+    color: rgb(116, 128, 156);
+}
+
+.messages {
+    padding: 10px;
+}

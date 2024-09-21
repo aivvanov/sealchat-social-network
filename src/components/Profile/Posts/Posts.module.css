@@ -1,0 +1,10 @@
+.posts {
+    padding: 10px;
+    color: white;
+    color: rgb(122, 62, 62);
+    font-size: large;
+}
+
+.post_button {
+    padding-bottom: 15px;
+}
