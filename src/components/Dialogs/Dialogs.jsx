@@ -2,14 +2,13 @@ import React from "react";
 import styles from "./Dialogs.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import { dialogs, messages } from "../../index";
 
-const Dialogs = () => {
+const Dialogs = (props) => {
 
-    const dialogElements = dialogs
-        .map(dialog => <Dialog id={dialog.id} userName={dialog.name} />);
+    const dialogElements = props.state.dialogs
+        .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} />);
 
-    const messageElements = messages
+    const messageElements = props.state.messages
         .map(message => <Message messageText={message.text} />);
 
     return (

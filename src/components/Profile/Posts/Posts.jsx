@@ -1,12 +1,11 @@
 import React from "react";
 import styles from './Posts.module.css';
 import { Post } from "./Post/Post";
-import { posts } from '../../../index';
 
 
-const Posts = () => {
+const Posts = (props) => {
 
-  const postElements = posts
+  const postElements = props.posts
     .map(post => <Post message={post.message} likesCount={post.likesCount} />);
 
   return (

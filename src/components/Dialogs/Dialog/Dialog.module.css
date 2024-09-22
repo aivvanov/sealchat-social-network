@@ -1,0 +1,40 @@
+.dialog {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 70px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.dialog img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    border-color: blue;
+    border-style: groove;
+}
+
+.dialog:hover img {
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+    border-style: dashed;
+}
+
+.dialog .dialog_user_name {
+    font-size: 18px;
+    text-decoration: none;
+    color: linear-gradient(135deg, #2c3e50, #55619f);
+}
+
+.dialog a:hover {
+    font-style: italic;
+}
+
+.active_dialog {
+    font-style: italic;
+    font-size: 20px;
+    text-decoration: none;
+    color: linear-gradient(135deg, #2c3e50, #55619f);
+}
