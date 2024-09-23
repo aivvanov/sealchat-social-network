@@ -4,7 +4,9 @@ import styles from "./Message.module.css";
 const Message = (props) => {
     return (
         <div className={styles.message}>
+            <img src={props.messageUserImage} alt="userImage" />
             {props.messageText}
+            {props.messageDate}
         </div>
     );
 }

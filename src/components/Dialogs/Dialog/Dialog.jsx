@@ -8,8 +8,8 @@ const dialog = (props) => {
 
     return (
         <div className={styles.dialog}>
-            <img src={props.userImage} />
-            <NavLink className={({ isActive }) => (isActive ? styles.active_dialog : styles.dialog_user_name)} to={path}>
+            <NavLink className={({ isActive }) => (isActive ? styles.active_dialog : styles.dialog_name)} to={path}>
+                <img src={props.userImage} alt="userImage"/>
                 {props.userName}
             </NavLink>
         </div>

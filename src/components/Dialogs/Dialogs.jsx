@@ -9,13 +9,20 @@ const Dialogs = (props) => {
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} />);
 
     const messageElements = props.state.messages
-        .map(message => <Message messageText={message.text} />);
+        .map(message => {
+
+            const date = new Date(message.user.createdAt);
+            const formattedDate = isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleString();
+
+            return <Message messageText={message.text} messageUserImage={message.user.icon} messageDate={formattedDate} />
+        });
 
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialog_items}>
                 {dialogElements}
             </div>
+            <div className={styles.separator}></div>
             <div className={styles.messages}>
                 {messageElements}
             </div>

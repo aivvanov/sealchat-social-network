@@ -1,40 +1,56 @@
 .dialog {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 70px 1fr;
-    align-items: center;
-    gap: 20px;
-    padding: 10px;
+    padding-top: 10px;
 }
 
 .dialog img {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 40px;
-    border-color: blue;
+    border-color: rgb(26, 46, 103);
     border-style: groove;
 }
 
 .dialog:hover img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-width: 2px;
     border-style: dashed;
 }
 
-.dialog .dialog_user_name {
+.active_dialog img {
+    width: 70px;
+    height: 70px;
+    border-width: 2px;
+    border-style: double;
+}
+
+.dialog .dialog_name {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 30px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
     font-size: 18px;
     text-decoration: none;
     color: linear-gradient(135deg, #2c3e50, #55619f);
+    font-style: normal;
 }
 
 .dialog a:hover {
     font-style: italic;
+    font-size: 20px;
 }
 
 .active_dialog {
-    font-style: italic;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 30px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
     font-size: 20px;
     text-decoration: none;
     color: linear-gradient(135deg, #2c3e50, #55619f);
+    font-style: italic;
 }

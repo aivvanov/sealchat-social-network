@@ -1,15 +1,15 @@
 .dialogs {
     display: grid;
-    grid-template-columns: auto 80%;
+    grid-template-columns: 300px 2px 1fr;
 }
 
-.dialogs .dialog_items {
+.dialog_items {
     padding: 10px;
 }
 
-.dialog_items.active,
-.dialog_items:hover {
-    color: rgb(116, 128, 156);
+.separator {
+    height: 152vh;
+    background-color: #000000;
 }
 
 .messages {
