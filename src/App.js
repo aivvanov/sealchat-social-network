@@ -9,7 +9,7 @@ import { Info } from './components/Info/Info';
 import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
-import { Footer } from './components/Footer/Footer';
+// import { Footer } from './components/Footer/Footer';
 
 
 const App = (props) => {
@@ -30,7 +30,7 @@ const App = (props) => {
             <Route path='/settings' element={<Settings />} />
           </Routes>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

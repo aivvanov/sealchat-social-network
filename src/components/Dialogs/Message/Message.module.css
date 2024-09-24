@@ -1,23 +1,49 @@
-.message {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 30px 1fr;
+.current_user_message {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 20px;
-    padding-top: 20px;
-    padding-left: 15px;
-    margin-top: 20px;
-    font-size: 15px;
-    text-decoration: none;
-    color: linear-gradient(135deg, #2c3e50, #55619f);
-    font-style: italic;
-    border-radius: 40px;
-    background-color: rgb(176, 176, 196);
+    gap: 10px;
+    margin: 10px 0;
 }
 
-.message img {
+.user_message {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 40px;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.message_content {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.current_user_message .message_content {
+    background-color: #DCF8C6;
+    color: #000;
+}
+
+.user_message .message_content {
+    background-color: #E8EAF6;
+    color: #000;
+}
+
+.user_message img,
+.current_user_message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.message_content p {
+    margin: 0 0 5px 0;
+}
+
+.message_content span {
+    font-size: 12px;
+    color: #666;
 }

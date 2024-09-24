@@ -5,6 +5,8 @@ import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper } from 'r
 
 const Navbar = (props) => {
 
+  const telegram = process.env.REACT_APP_TELEGRAM;
+  const phone = process.env.REACT_APP_PHONE;
   const userImages = props.state.map(image => <img src={image.icon} alt="userImage" />);
 
   return (
@@ -43,6 +45,13 @@ const Navbar = (props) => {
         <div className={styles.friends_block}>
           <h3>My friends</h3>
           {userImages}
+        </div>
+      </div>
+      <div className={styles.info_content}>
+        <div className={styles.contact_info}>
+          <p className={styles.contact_header}>Contact me</p>
+          <p>Telegram: <a href={`https://t.me/${telegram}`} target="_blank" rel="noopener noreferrer">{telegram}</a></p>
+          <p>Phone: <a href={`tel:${phone}`}>{phone}</a></p>
         </div>
       </div>
     </nav>

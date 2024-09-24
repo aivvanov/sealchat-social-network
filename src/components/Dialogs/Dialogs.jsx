@@ -14,7 +14,7 @@ const Dialogs = (props) => {
             const date = new Date(message.user.createdAt);
             const formattedDate = isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleString();
 
-            return <Message messageText={message.text} messageUserImage={message.user.icon} messageDate={formattedDate} />
+            return <Message messageText={message.text} messageUserImage={message.user.icon} messageDate={formattedDate} isMessageCurrentUser={message.user.isCurrentUser} />
         });
 
     return (
