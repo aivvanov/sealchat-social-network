@@ -4,18 +4,11 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-
     const dialogElements = props.state.dialogs
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} />);
 
     const messageElements = props.state.messages
-        .map(message => {
-
-            const date = new Date(message.user.createdAt);
-            const formattedDate = isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleString();
-
-            return <Message messageText={message.text} messageUserImage={message.user.icon} messageDate={formattedDate} isMessageCurrentUser={message.user.isCurrentUser} />
-        });
+        .map(message => <Message messages={props.state.messages} />);
 
     return (
         <div className={styles.dialogs}>
