@@ -1,17 +1,63 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 300px 2px 1fr;
+    grid-template-areas: 
+    "d s m"
+    "d s i";
+    grid-template-columns: 300px 1px 1fr;
 }
 
 .dialog_items {
+    grid-area: d;
     padding: 10px;
 }
 
 .separator {
-    height: 117vh;
-    background-color: #000000;
+    grid-area: s;
+    height: auto;
+    background-color: #cfcfcf;
 }
 
 .messages {
+    grid-area: m;
     padding: 10px;
+}
+
+.message_input_container {
+    grid-area: "i";
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 50px;
+}
+
+.message_input {
+    width: 80%;
+    height: 50px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: none;
+    margin-right: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.message_input:focus {
+    border-color: #007bff;
+}
+
+.send_button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.send_button:hover {
+    background-color: #0056b3;
 }
