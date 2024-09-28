@@ -1,17 +1,20 @@
+import { rerenderEntireTree } from "../render";
+
 const state = {
   profilePage: {
     posts: [
       {
-        id: "1",
+        id: 2,
         message: "Hello!! how are you guys doing?",
         likesCount: 10
       },
       {
-        id: "2",
+        id: 1,
         message: "Just created my new post here!",
         likesCount: 23
       }
     ],
+    newPostText: ""
   },
   dialogsPage: {
     dialogs: [
@@ -54,7 +57,7 @@ const state = {
       },
       {
         id: "2",
-        text: "I miss you, bro <3",
+        text: "Miss you, babz <3",
         user: {
           id: "1",
           icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSId_pIi48v4SnNz81LkwY8hqViBBw73_hy_w&s",
@@ -74,6 +77,29 @@ const state = {
       }
     ]
   }
+}
+
+window.state = state;
+
+export const updatePostText = (newPostText) => {
+  state.profilePage.newPostText = newPostText;
+  rerenderEntireTree(state);
+}
+
+export const addPost = () => {
+
+  const postId = ++(state.profilePage.posts[0].id);
+
+  const message = {
+    id: postId,
+    message: state.profilePage.newPostText,
+    likesCount: 0
+  };
+
+  state.profilePage.posts.unshift(message);
+  state.profilePage.newPostText = '';
+  console.log(`Post with id ${message.id} was successfully created.`);
+  rerenderEntireTree(state);
 }
 
 export default state
