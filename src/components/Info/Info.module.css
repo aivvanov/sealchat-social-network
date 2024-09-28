@@ -1,0 +1,9 @@
+.info_block {
+    padding: 10px;
+}
+
+.info_block textarea {
+    padding: 10px;
+    border-radius: 10px;
+    resize: none;
+}

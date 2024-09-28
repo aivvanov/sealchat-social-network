@@ -28,7 +28,7 @@ const Dialogs = (props) => {
             </div>
             <div className={styles.message_input_container}>
                 <textarea
-                    placeholder="Напишите ваше сообщение..."
+                    placeholder="Text message..."
                     className={styles.message_input}
                     ref={newMassageElement}
                 />
