@@ -66,7 +66,7 @@ const state = {
         createdAt: 1694860800000
       },
       {
-        id: "1",
+        id: "3",
         text: "Gonna programming now! Bye.",
         user: {
           id: "2",
@@ -75,7 +75,8 @@ const state = {
         },
         createdAt: 1694860800000
       }
-    ]
+    ],
+    newMessageText: ""
   }
 }
 
@@ -101,5 +102,32 @@ export const addPost = () => {
   console.log(`Post with id ${message.id} was successfully created.`);
   rerenderEntireTree(state);
 }
+
+export const updateMessageText = (newMessageText) => {
+  state.dialogsPage.newMessageText = newMessageText;
+  rerenderEntireTree(state);
+}
+
+export const sendMessage = () => {
+
+  const messageId = ++(state.dialogsPage.messages[state.dialogsPage.messages.length-1].id);
+
+  const message = {
+    id: messageId,
+    text: state.dialogsPage.newMessageText,
+    user: {
+      id: "2",
+      icon: "https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1",
+      isCurrentUser: true
+    },
+    createdAt: Date.now()
+  }
+
+  state.dialogsPage.messages.push(message);
+  state.dialogsPage.newMessageText = '';
+  console.log(`Message with id ${message.id} was successfully created.`);
+  rerenderEntireTree(state);
+}
+
 
 export default state

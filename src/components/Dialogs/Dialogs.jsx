@@ -10,12 +10,16 @@ const Dialogs = (props) => {
     const messageElements = props.state.messages
         .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt} messageUserInfo={message.user} />);
 
-    const newMassageElement = React.createRef();
-
     const sendMessage = () => {
-        const text = newMassageElement.current.value;
-        alert(text);
+        props.sendMessage();
     }
+
+    const onMessageChange = () => {
+        const text = newMessageElement.current.value;
+        props.updateMessageText(text);
+    }
+
+    const newMessageElement = React.createRef();
 
     return (
         <div className={styles.dialogs}>
@@ -30,7 +34,9 @@ const Dialogs = (props) => {
                 <textarea
                     placeholder="Text message..."
                     className={styles.message_input}
-                    ref={newMassageElement}
+                    ref={newMessageElement}
+                    value={props.state.newMessageText}
+                    onChange={onMessageChange}
                 />
                 <button
                     className={styles.send_button}
