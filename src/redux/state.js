@@ -1,5 +1,3 @@
-import { rerenderEntireTree } from "../render";
-
 const state = {
   profilePage: {
     posts: [
@@ -84,7 +82,7 @@ window.state = state;
 
 export const updatePostText = (newPostText) => {
   state.profilePage.newPostText = newPostText;
-  rerenderEntireTree(state);
+  rerenderEntireTree();
 }
 
 export const addPost = () => {
@@ -100,17 +98,17 @@ export const addPost = () => {
   state.profilePage.posts.unshift(message);
   state.profilePage.newPostText = '';
   console.log(`Post with id ${message.id} was successfully created.`);
-  rerenderEntireTree(state);
+  rerenderEntireTree();
 }
 
 export const updateMessageText = (newMessageText) => {
   state.dialogsPage.newMessageText = newMessageText;
-  rerenderEntireTree(state);
+  rerenderEntireTree();
 }
 
 export const sendMessage = () => {
 
-  const messageId = ++(state.dialogsPage.messages[state.dialogsPage.messages.length-1].id);
+  const messageId = ++(state.dialogsPage.messages[state.dialogsPage.messages.length - 1].id);
 
   const message = {
     id: messageId,
@@ -126,7 +124,13 @@ export const sendMessage = () => {
   state.dialogsPage.messages.push(message);
   state.dialogsPage.newMessageText = '';
   console.log(`Message with id ${message.id} was successfully created.`);
-  rerenderEntireTree(state);
+  rerenderEntireTree();
+}
+
+let rerenderEntireTree;
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
 
 
