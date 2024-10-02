@@ -78,55 +78,55 @@ let store = {
       newMessageText: ""
     }
   },
+  _callSubscriber() { },
+
   getState() {
     return this._state
   },
-  _callSubscriber() {},
-  updatePostText(newPostText) {
-    this._state.profilePage.newPostText = newPostText;
-    this._callSubscriber();
-  },
-  addPost() {
-
-    const postId = ++(this._state.profilePage.posts[0].id);
-
-    const message = {
-      id: postId,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0
-    };
-
-    this._state.profilePage.posts.unshift(message);
-    this._state.profilePage.newPostText = '';
-    console.log(`Post with id ${message.id} was successfully created.`);
-    this._callSubscriber();
-  },
-  updateMessageText(newMessageText) {
-    this._state.dialogsPage.newMessageText = newMessageText;
-    this._callSubscriber();
-  },
-  sendMessage() {
-
-    const messageId = ++(this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id);
-
-    const message = {
-      id: messageId,
-      text: this._state.dialogsPage.newMessageText,
-      user: {
-        id: "2",
-        icon: "https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1",
-        isCurrentUser: true
-      },
-      createdAt: Date.now()
-    }
-
-    this._state.dialogsPage.messages.push(message);
-    this._state.dialogsPage.newMessageText = '';
-    console.log(`Message with id ${message.id} was successfully created.`);
-    this._callSubscriber();
-  },
   subscribe(observer) {
-   this._callSubscriber = observer;
+    this._callSubscriber = observer;
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+
+      const postId = ++(this._state.profilePage.posts[0].id);
+
+      const message = {
+        id: postId,
+        message: this._state.profilePage.newPostText,
+        likesCount: 0
+      };
+
+      this._state.profilePage.posts.unshift(message);
+      this._state.profilePage.newPostText = '';
+      console.log(`Post with id ${message.id} was successfully created.`);
+      this._callSubscriber();
+    } else if (action.type === 'UPDATE-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newPostText;
+      this._callSubscriber();
+    } else if (action.type === 'SEND-MESSAGE') {
+
+      const messageId = ++(this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id);
+
+      const message = {
+        id: messageId,
+        text: this._state.dialogsPage.newMessageText,
+        user: {
+          id: "2",
+          icon: "https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1",
+          isCurrentUser: true
+        },
+        createdAt: Date.now()
+      }
+
+      this._state.dialogsPage.messages.push(message);
+      this._state.dialogsPage.newMessageText = '';
+      console.log(`Message with id ${message.id} was successfully created.`);
+      this._callSubscriber();
+    } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
+      this._state.dialogsPage.newMessageText = action.newMessageText;
+      this._callSubscriber();
+    }
   }
 };
 
