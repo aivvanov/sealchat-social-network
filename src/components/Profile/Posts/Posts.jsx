@@ -6,25 +6,25 @@ import { addPostActionCreator, updatePostTextActionCreator } from "../../../redu
 
 const Posts = (props) => {
 
-  const postElements = props.posts.posts
+  const postElements = props.store.getState().profilePage.posts
     .map(post => <Post message={post.message} likesCount={post.likesCount} />);
 
   const newPostElement = React.createRef();
 
   const createNewPost = () => {
-    props.dispatch(addPostActionCreator());
+    props.store.dispatch(addPostActionCreator());
   }
 
-  const onPostChange = () => {
-    const text = newPostElement.current.value;
-    props.dispatch(updatePostTextActionCreator(text));
+  const onPostChange = (e) => {
+    const text = e.target.value;
+    props.store.dispatch(updatePostTextActionCreator(text));
   }
 
   return (
     <div className={styles.posts}>
       <h3>My posts</h3>
       <div className={styles.post_items}>
-        <textarea placeholder="Add new post..." onChange={onPostChange} value={props.posts.newPostText} ref={newPostElement} />
+        <textarea placeholder="Add new post..." onChange={onPostChange} value={props.store.getState().profilePage.newPostText} ref={newPostElement} />
         <div>
           <button onClick={createNewPost}>Add post</button>
         </div>
