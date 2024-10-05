@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import ProfileReducer from "./profile-reducer";
+import DialogsReducer from "./dialogs-reducer";
 
 let store = {
   _state: {
@@ -92,54 +90,14 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action) {
-    if (action.type === ADD_POST) {
 
-      const postId = ++(this._state.profilePage.posts[0].id);
+    this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action);
 
-      const message = {
-        id: postId,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0
-      };
-
-      this._state.profilePage.posts.unshift(message);
-      this._state.profilePage.newPostText = '';
-      console.log(`Post with id ${message.id} was successfully created.`);
-      this._callSubscriber();
-    } else if (action.type === UPDATE_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newPostText;
-      this._callSubscriber();
-    } else if (action.type === SEND_MESSAGE) {
-
-      const messageId = ++(this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id);
-
-      const message = {
-        id: messageId,
-        text: this._state.dialogsPage.newMessageText,
-        user: {
-          id: "2",
-          icon: "https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1",
-          isCurrentUser: true
-        },
-        createdAt: Date.now()
-      }
-
-      this._state.dialogsPage.messages.push(message);
-      this._state.dialogsPage.newMessageText = '';
-      console.log(`Message with id ${message.id} was successfully created.`);
-      this._callSubscriber();
-    } else if (action.type === UPDATE_MESSAGE_TEXT) {
-      this._state.dialogsPage.newMessageText = action.newMessageText;
-      this._callSubscriber();
-    }
+    this._callSubscriber();
   }
 };
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updatePostTextActionCreator = (text) => ({ type: UPDATE_POST_TEXT, newPostText: text })
-export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE })
-export const updateMessageTextActionCreator = (text) => ({ type: UPDATE_MESSAGE_TEXT, newMessageText: text })
-
 window.store = store;
 
-export default store
+export default store;
