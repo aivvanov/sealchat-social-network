@@ -6,7 +6,7 @@ import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper } from 'r
 const Navbar = (props) => {
   const telegram = process.env.REACT_APP_TELEGRAM;
   const phone = process.env.REACT_APP_PHONE;
-  const userImages = props.store.getState().dialogsPage.dialogs
+  const userImages = props.state.dialogsPage.dialogs
     .map(image => <img src={image.icon} alt="userImage" />);
 
   return (

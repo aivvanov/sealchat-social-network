@@ -5,19 +5,19 @@ import Message from "./Message/Message";
 import { sendMessageActionCreator, updateMessageTextActionCreator } from "../../redux/dialogs-reducer";
 
 const Dialogs = (props) => {
-    const dialogElements = props.store.getState().dialogsPage.dialogs
+    const dialogElements = props.state.dialogsPage.dialogs
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} />);
 
-    const messageElements = props.store.getState().dialogsPage.messages
+    const messageElements = props.state.dialogsPage.messages
         .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt} messageUserInfo={message.user} />);
 
     const sendMessage = () => {
-        props.store.dispatch(sendMessageActionCreator());
+        props.dispatch(sendMessageActionCreator());
     }
 
     const onMessageChange = (e) => {
         const text = e.target.value;
-        props.store.dispatch(updateMessageTextActionCreator(text));
+        props.dispatch(updateMessageTextActionCreator(text));
     }
 
     const newMessageElement = React.createRef();
@@ -36,7 +36,7 @@ const Dialogs = (props) => {
                     placeholder="Text message..."
                     className={styles.message_input}
                     ref={newMessageElement}
-                    value={props.store.getState().dialogsPage.newMessageText}
+                    value={props.state.dialogsPage.newMessageText}
                     onChange={onMessageChange}
                 />
                 <button
