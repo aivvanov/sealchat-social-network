@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper } from 'react-icons/fa';
 
 const Navbar = (props) => {
-  const telegram = process.env.REACT_APP_TELEGRAM;
-  const phone = process.env.REACT_APP_PHONE;
-  const userImages = props.state.dialogsPage.dialogs
+  const telegram = props.telegram;
+  const phone = props.phone;
+  const userImages = props.dialogs
     .map(image => <img src={image.icon} alt="userImage" />);
 
   return (
