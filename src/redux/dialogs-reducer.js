@@ -66,8 +66,7 @@ const initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE:
-
+        case SEND_MESSAGE: {
             const messageId = ++(state.messages[state.messages.length - 1].id);
             const message = {
                 id: messageId,
@@ -80,13 +79,20 @@ const dialogsReducer = (state = initialState, action) => {
                 createdAt: Date.now()
             }
 
-            state.messages.push(message);
-            state.newMessageText = '';
+            const stateCopy = { ...state };
+            stateCopy.messages = [...state.messages];
+
+            stateCopy.messages.push(message);
+            stateCopy.newMessageText = '';
             console.log(`Message with id ${message.id} was successfully created.`);
-            return state;
-        case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newMessageText;
-            return state;
+            return stateCopy;
+        }
+        case UPDATE_MESSAGE_TEXT: {
+            const stateCopy = { ...state };
+
+            stateCopy.newMessageText = action.newMessageText;
+            return stateCopy;
+        }
         default:
             return state;
     }
