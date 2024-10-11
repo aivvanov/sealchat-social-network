@@ -20,7 +20,7 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case ADD_POST: {
+        case ADD_POST:
             const postId = ++(state.posts[0].id);
             const message = {
                 id: postId,
@@ -28,19 +28,18 @@ const profileReducer = (state = initialState, action) => {
                 likesCount: 0
             };
 
-            const stateCopy = { ...state };
-            stateCopy.posts = [...state.posts];
-
-            stateCopy.posts.unshift(message);
-            stateCopy.newPostText = '';
             console.log(`Post with id ${message.id} was successfully created.`);
-            return stateCopy;
-        }
-        case UPDATE_POST_TEXT: {
-            const stateCopy = {...state};
-            stateCopy.newPostText = action.newPostText;
-            return stateCopy;
-        }
+
+            return {
+                ...state,
+                posts: [message, ...state.posts],
+                newPostText: ''
+            };
+        case UPDATE_POST_TEXT:
+            return {
+                ...state,
+                newPostText: action.newPostText
+            };
         default:
             return state;
     }
