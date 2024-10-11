@@ -7,7 +7,7 @@ const Navbar = (props) => {
   const telegram = props.telegram;
   const phone = props.phone;
   const userImages = props.dialogs
-    .map(image => <img src={image.icon} alt="userImage" />);
+    .map(image => <img src={image.icon} key={image.id} alt="userImage" />);
 
   return (
     <nav className={styles.nav}>
