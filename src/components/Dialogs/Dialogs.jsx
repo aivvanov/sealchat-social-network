@@ -42,7 +42,7 @@ const Dialogs = (props) => {
                     className={styles.send_button}
                     onClick={onSendMessage}
                 >
-                    Отправить
+                    Send
                 </button>
             </div>
         </div>
