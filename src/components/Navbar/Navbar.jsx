@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
-import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers } from 'react-icons/fa';
 
 const Navbar = (props) => {
-  const telegram = props.telegram;
-  const phone = props.phone;
+  const telegram = process.env.REACT_APP_TELEGRAM;
+  const phone = process.env.REACT_APP_PHONE;
   const userImages = props.dialogs
     .map(image => <img src={image.icon} key={image.id} alt="userImage" />);
 
@@ -35,6 +35,11 @@ const Navbar = (props) => {
         <div className={styles.item}>
           <NavLink to="music" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
             <FaMusic className={styles.icon} />Music
+          </NavLink>
+        </div>
+        <div className={styles.item}>
+          <NavLink to="users" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
+            <FaUsers className={styles.icon} />Find users
           </NavLink>
         </div>
         <div className={styles.item}>
