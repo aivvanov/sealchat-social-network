@@ -1,12 +1,12 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
-import { Header } from './components//Header/Header';
-import { Profile } from './components/Profile/Profile';
-import { Info } from './components/Info/Info';
-import { News } from './components/News/News';
-import { Music } from './components/Music/Music';
-import { Settings } from './components/Settings/Settings';
+import Header from './components//Header/Header';
+import Profile from './components/Profile/Profile';
+import Info from './components/Info/Info';
+import News from './components/News/News';
+import Music from './components/Music/Music';
+import Settings from './components/Settings/Settings';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -34,4 +34,4 @@ const App = (props) => {
   );
 }
 
-export default App
+export default App;

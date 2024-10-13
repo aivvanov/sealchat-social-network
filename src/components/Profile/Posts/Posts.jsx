@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Posts.module.css';
-import { Post } from "./Post/Post";
+import Post from "./Post/Post";
 
 const Posts = (props) => {
 
@@ -34,4 +34,4 @@ const Posts = (props) => {
   );
 }
 
-export { Posts }
+export default Posts;

@@ -21,4 +21,4 @@ const Post = (props) => {
     );
 }
 
-export { Post }
+export default Post;

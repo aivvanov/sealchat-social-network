@@ -1,9 +1,10 @@
 .dialogs {
     display: grid;
-    grid-template-areas: 
-    "d s m"
-    "d s i";
+    grid-template-areas:
+        "d s m"
+        "d s i";
     grid-template-columns: 300px 1px 1fr;
+    background-color: #f0f4f8;
 }
 
 .dialog_items {
