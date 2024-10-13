@@ -21,4 +21,4 @@ const Message = (props) => {
 };
 
 
-export default Message
+export default Message;

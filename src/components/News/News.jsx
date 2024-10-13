@@ -9,4 +9,4 @@ const News = () => {
     )
 }
 
-export { News }
+export default News;

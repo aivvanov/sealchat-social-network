@@ -16,7 +16,6 @@ const Users = (props) => {
                 },
                 isFollowed: true,
                 statusText: "Hello! How you guys doing here?"
-
             },
             {
                 id: "2",
@@ -66,43 +65,40 @@ const Users = (props) => {
                 isFollowed: false,
                 statusText: "Just wanna talk with someone :("
             }
-        ])
+        ]);
     }
 
-    return <div>
-        {
-            props.users.map(user => {
-                return <div key={user.id}>
-                    <span>
-                        <div>
-                            <img src={user.photoUrl} alt="userPhoto" />
+    return (
+        <div className={styles.users_container}>
+            {
+                props.users.map(user => {
+                    return (
+                        <div key={user.id} className={styles.user_card}>
+                            <div className={styles.user_info}>
+                                <img className={styles.user_photo} src={user.photoUrl} alt="userPhoto" />
+                                <div className={styles.user_details}>
+                                    <div className={styles.user_name}>{user.fullName}</div>
+                                    <div className={styles.user_status}>{user.statusText}</div>
+                                    <div className={styles.user_location}>
+                                        {user.location.city}, {user.location.country}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.action_button}>
+                                {user.isFollowed
+                                    ? <button className={styles.unfollow_button} onClick={() => { props.unfollow(user.id) }}>Unfollow</button>
+                                    : <button className={styles.follow_button} onClick={() => { props.follow(user.id) }}>Follow</button>
+                                }
+                            </div>
                         </div>
-                        <div>
-                            {user.fullName}
-                        </div>
-                    </span>
-                    <span>
-                        <div>
-                            {user.statusText}
-                        </div>
-                        <div>
-                            {user.location.city},
-                            {user.location.country}
-                        </div>
-                    </span>
-                    <div>
-                        {user.isFollowed
-                            ? <button onClick={() => { props.unfollow(user.id) }} >Unfollow</button>
-                            : <button onClick={() => { props.follow(user.id) }} >Follow</button>
-                        }
-                    </div>
-                </div>
-            })
-        }
-        <div>
-            <button>Show more</button>
+                    )
+                })
+            }
+            <div className={styles.show_more_container}>
+                <button className={styles.show_more_button}>Show more</button>
+            </div>
         </div>
-    </div>
+    );
 }
 
-export default Users
+export default Users;

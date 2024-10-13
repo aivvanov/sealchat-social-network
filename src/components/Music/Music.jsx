@@ -9,4 +9,4 @@ const Music = () => {
     )
 }
 
-export { Music }
+export default Music;

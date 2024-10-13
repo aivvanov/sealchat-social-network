@@ -3,7 +3,7 @@ import styles from "./ProfileInfo.module.css";
 
 const ProfileInfo = (props) => {
     return (
-        <div>
+        <div className={styles.main_div} >
             <div>
                 <img className={styles.background_image}
                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMAe0I2cx5QFKTEMFDAm9Y4g2twU40K2OM5RMYFpnOzV0BV54qM7a8zvvBsxxHzSfetnk&usqp=CAU'
@@ -25,4 +25,4 @@ const ProfileInfo = (props) => {
     );
 }
 
-export default ProfileInfo
+export default ProfileInfo;
