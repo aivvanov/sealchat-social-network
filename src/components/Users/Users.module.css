@@ -88,22 +88,6 @@
     background-color: #d32f2f;
 }
 
-.show_more_container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.show_more_button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.show_more_button:hover {
-    background-color: #0056b3;
+.current_pagination_elem {
+    font-weight: bold;
 }
