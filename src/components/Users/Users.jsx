@@ -26,7 +26,9 @@ class Users extends React.Component {
 
     render() {
 
-        let pagesCount = Math.round(this.props.totalUsersCount / this.props.pageSize);
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        const startPage = Math.max(this.props.currentPage - 2, 1);
+        const endPage = Math.min(this.props.currentPage + 2, pagesCount);
 
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
@@ -59,14 +61,23 @@ class Users extends React.Component {
                         )
                     })
                 }
-                <div>
-                    {pages.map(page => {
-                        return <span onClick={() => this.onPageChanged(page)} className={this.props.currentPage === page
+                <div className={styles.pagination}>
+                    {startPage > 1 && <>
+                        <span onClick={() => this.onPageChanged(1)} className={styles.pagination_elem}>{"1"}</span>
+                        {startPage > 2 && <span className={styles.pagination_dots}>...</span>}
+                    </>}
+
+                    {pages.slice(startPage - 1, endPage).map(page => {
+                        return <span key={page} onClick={() => this.onPageChanged(page)} className={this.props.currentPage === page
                             ? styles.current_pagination_elem
                             : styles.pagination_elem
-                        }>{`<${page}>`}</span>
-                    })
-                    }
+                        }>{page}</span>
+                    })}
+
+                    {endPage < pagesCount && <>
+                        {endPage < pagesCount - 1 && <span className={styles.pagination_dots}>...</span>}
+                        <span onClick={() => this.onPageChanged(pagesCount)} className={styles.pagination_elem}>{pagesCount}</span>
+                    </>}
                 </div>
             </div>
         );
