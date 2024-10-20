@@ -24,6 +24,24 @@ class Users extends React.Component {
             })
     }
 
+    newMessageElement = React.createRef();
+
+    onSearchUsersChange(e) {
+        const text = e.target.value;
+        this.props.setCurrentSearchText(text);
+    }
+
+    onSearchUsersClick() {
+        const userSearchText = this.props.currentSearchText;
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/users?term=${userSearchText}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalCount(response.data.totalCount);
+            })
+        this.props.searchUsers()
+    }
+
     render() {
 
         const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
@@ -37,6 +55,18 @@ class Users extends React.Component {
 
         return (
             <div className={styles.users_container}>
+                <div className={styles.users_search}>
+                    <input
+                        className={styles.input_field}
+                        onChange={(e) => { this.onSearchUsersChange(e) }}
+                        ref={this.newMessageElement}
+                        value={this.props.currentSearchText}
+                        placeholder="Enter username here..." 
+                    />
+                    <button
+                        className={styles.search_button}
+                        onClick={() => { this.onSearchUsersClick() }} >Search</button>
+                </div>
                 {
                     this.props.users.map(user => {
                         return (
