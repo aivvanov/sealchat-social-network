@@ -37,13 +37,12 @@ class Users extends React.Component {
             .get(`https://social-network.samuraijs.com/api/1.0/users?term=${userSearchText}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
+                this.props.setTotalCount(response.data.totalCount);
             })
         this.props.searchUsers()
     }
 
     render() {
-
-        console.log(this.props);
 
         const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         const startPage = Math.max(this.props.currentPage - 2, 1);
