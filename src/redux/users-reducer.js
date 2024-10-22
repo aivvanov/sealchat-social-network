@@ -5,13 +5,15 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
 const SET_CURRENT_SEARCH_TEXT = "SET-CURRENT-SEARCH-TEXT";
 const SEARCH_USERS = "SEARCH-USERS";
+const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 
 const initialState = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    currentSearchText: ""
+    currentSearchText: "",
+    isFetching: false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -47,6 +49,8 @@ const usersReducer = (state = initialState, action) => {
             return { ...state, currentSearchText: action.text }
         case SEARCH_USERS:
             return { ...state, currentSearchText: "" }
+        case TOGGLE_IS_FETCHING:
+            return { ...state, isFetching: action.isFetching }
         default:
             return state;
     }
@@ -59,5 +63,6 @@ export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, curr
 export const setTotalCountAC = (count) => ({ type: SET_TOTAL_COUNT, count });
 export const setCurrentSearchTextAC = (text) => ({ type: SET_CURRENT_SEARCH_TEXT, text });
 export const searchUsersAC = () => ({ type: SEARCH_USERS });
+export const toggleIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
 export default usersReducer;

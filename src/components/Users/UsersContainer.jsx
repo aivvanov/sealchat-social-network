@@ -1,15 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import { followAC, setUsersAC, unfollowAC, setCurrentPageAC, setTotalCountAC, setCurrentSearchTextAC, searchUsersAC } from "../../redux/users-reducer";
+import React from 'react';
+import { connect } from 'react-redux';
+import { followAC, setUsersAC, unfollowAC, setCurrentPageAC, setTotalCountAC, setCurrentSearchTextAC, searchUsersAC, toggleIsFetchingAC } from '../../redux/users-reducer';
 import axios from 'axios';
-import Users from "./Users";
+import Users from './Users';
+import Loader from '../common/Loader/Loader';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+        this.props.toggleIsFetching(true);
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.currentPage ? this.currentPage : 1}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items);
                 this.props.setTotalCount(response.data.totalCount);
             })
@@ -17,9 +20,11 @@ class UsersContainer extends React.Component {
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
+        this.props.toggleIsFetching(true);
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
             })
     }
@@ -30,10 +35,12 @@ class UsersContainer extends React.Component {
     }
 
     onSearchUsersClick = () => {
+        this.props.toggleIsFetching(true);
         const userSearchText = this.props.currentSearchText;
         axios
             .get(`https://social-network.samuraijs.com/api/1.0/users?term=${userSearchText}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
                 this.props.setTotalCount(response.data.totalCount);
             })
@@ -41,18 +48,24 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        return <Users
-            users={this.props.users}
-            totalUsersCount={this.props.totalUsersCount}
-            currentPage={this.props.currentPage}
-            pageSize={this.props.pageSize}
-            currentSearchText={this.props.currentSearchText}
-            unfollow={this.props.unfollow}
-            follow={this.props.follow}
-            onSearchUsersChange={this.onSearchUsersChange}
-            onSearchUsersClick={this.onSearchUsersClick}
-            onPageChanged={this.onPageChanged}
-        />
+        return <>
+            {this.props.isFetching
+                ? <Loader />
+                :
+                <Users
+                    users={this.props.users}
+                    totalUsersCount={this.props.totalUsersCount}
+                    currentPage={this.props.currentPage}
+                    pageSize={this.props.pageSize}
+                    currentSearchText={this.props.currentSearchText}
+                    unfollow={this.props.unfollow}
+                    follow={this.props.follow}
+                    onSearchUsersChange={this.onSearchUsersChange}
+                    onSearchUsersClick={this.onSearchUsersClick}
+                    onPageChanged={this.onPageChanged}
+                />
+            }
+        </>
     }
 }
 
@@ -62,7 +75,8 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        currentSearchText: state.usersPage.currentSearchText
+        currentSearchText: state.usersPage.currentSearchText,
+        isFetching: state.usersPage.isFetching
     }
 };
 
@@ -88,6 +102,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         searchUsers: () => {
             dispatch(searchUsersAC())
+        },
+        toggleIsFetching: (isFetching) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 };
