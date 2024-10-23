@@ -139,7 +139,7 @@
 }
 
 .users_search input:focus {
-    border-color: #4CAF50; /* цвет при фокусе */
+    border-color: #4CAF50;
 }
 
 .users_search button {

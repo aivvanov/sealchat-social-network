@@ -9,7 +9,7 @@ const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 
 const initialState = {
     users: [],
-    pageSize: 10,
+    pageSize: 7,
     totalUsersCount: 0,
     currentPage: 1,
     currentSearchText: "",
@@ -56,13 +56,13 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const followAC = (userId) => ({ type: FOLLOW, userId });
-export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
-export const setUsersAC = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
-export const setTotalCountAC = (count) => ({ type: SET_TOTAL_COUNT, count });
-export const setCurrentSearchTextAC = (text) => ({ type: SET_CURRENT_SEARCH_TEXT, text });
-export const searchUsersAC = () => ({ type: SEARCH_USERS });
-export const toggleIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const follow = (userId) => ({ type: FOLLOW, userId });
+export const unfollow = (userId) => ({ type: UNFOLLOW, userId });
+export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
+export const setTotalCount = (count) => ({ type: SET_TOTAL_COUNT, count });
+export const setCurrentSearchText = (text) => ({ type: SET_CURRENT_SEARCH_TEXT, text });
+export const searchUsers = () => ({ type: SEARCH_USERS });
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 
 export default usersReducer;

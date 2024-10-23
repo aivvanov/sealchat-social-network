@@ -4,8 +4,6 @@ import userPhoto from '../../assets/images/userPhoto.jpeg';
 
 const Users = (props) => {
 
-    const newMessageElement = React.createRef();
-
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const startPage = Math.max(props.currentPage - 2, 1);
     const endPage = Math.min(props.currentPage + 2, pagesCount);
@@ -17,18 +15,6 @@ const Users = (props) => {
 
     return (
         <div className={styles.users_container}>
-            <div className={styles.users_search}>
-                <input
-                    className={styles.input_field}
-                    onChange={ (e) => props.onSearchUsersChange(e)}
-                    ref={newMessageElement}
-                    value={props.currentSearchText}
-                    placeholder="Enter username here..."
-                />
-                <button
-                    className={styles.search_button}
-                    onClick={ () => props.onSearchUsersClick()} >Search</button>  
-            </div>
             {
                 props.users.map(user => {
                     return (
