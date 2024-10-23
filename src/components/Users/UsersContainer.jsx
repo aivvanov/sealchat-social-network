@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, setUsersAC, unfollowAC, setCurrentPageAC, setTotalCountAC, setCurrentSearchTextAC, searchUsersAC, toggleIsFetchingAC } from '../../redux/users-reducer';
+import { follow, setUsers, unfollow, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching } from '../../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
+import SearchField from '../common/SearchField/SearchField';
 
 class UsersContainer extends React.Component {
+
+    newMessageElement = React.createRef();
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
@@ -49,19 +52,21 @@ class UsersContainer extends React.Component {
 
     render() {
         return <>
+            < SearchField
+                currentSearchText={this.props.currentSearchText}
+                newMessageElement={this.newMessageElement}
+                onSearchUsersChange={this.onSearchUsersChange}
+                onSearchUsersClick={this.onSearchUsersClick}
+            />
             {this.props.isFetching
                 ? <Loader />
-                :
-                <Users
+                : <Users
                     users={this.props.users}
                     totalUsersCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
                     pageSize={this.props.pageSize}
-                    currentSearchText={this.props.currentSearchText}
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
-                    onSearchUsersChange={this.onSearchUsersChange}
-                    onSearchUsersClick={this.onSearchUsersClick}
                     onPageChanged={this.onPageChanged}
                 />
             }
@@ -80,33 +85,6 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalCount: (count) => {
-            dispatch(setTotalCountAC(count))
-        },
-        setCurrentSearchText: (text) => {
-            dispatch(setCurrentSearchTextAC(text))
-        },
-        searchUsers: () => {
-            dispatch(searchUsersAC())
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching
+})(UsersContainer);
