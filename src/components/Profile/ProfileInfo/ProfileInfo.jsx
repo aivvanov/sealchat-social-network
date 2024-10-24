@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
+import Loader from "../../common/Loader/Loader";
 
 const ProfileInfo = (props) => {
+
+    if (!props.profile) {
+        return <Loader />
+    }
+
     return (
         <div className={styles.main_div} >
             <div>
@@ -11,14 +17,13 @@ const ProfileInfo = (props) => {
                 </img>
                 <div className={styles.user_name}>
                     <img className={styles.profile_picture}
-                        src='https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1'
+                        src={props.profile.photos.large}
                         alt="profile_picture">
                     </img>
-                    Ratu Felisha
+                    {props.profile.fullName}
                 </div>
                 <div className={styles.description}>
-                    While you might have an idea of what traits and characteristics you want to highlight about yourself, you might not be sure how to format your answers. Sometimes, an interviewer wants you to give a detailed description of your character, and other times, they just want you to summarize who you are in as few words as possible. Either way, we’ve got you covered.
-                    In the examples below, we’ve provided some sample interview questions and answers, along with some bonus tips. Feel free to take sentences from different responses to create your own, unique way of describing yourself! While we don’t recommend using these answers word-for-word, they should give you an idea of what good, effective interview answers look like.
+                    {props.profile.aboutMe}
                 </div>
             </div>
         </div>
