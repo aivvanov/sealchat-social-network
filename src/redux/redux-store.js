@@ -11,4 +11,6 @@ const reducersBunch = combineReducers({
 
 let store = createStore(reducersBunch);
 
+window.store = store;
+
 export default store;
