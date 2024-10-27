@@ -8,7 +8,7 @@ const Header = () => {
     <header className={styles.header}>
       <NavLink to="/profile" className={styles.icon_container}>
         <img className={styles.icon} src={headerIcon} alt="headerIcon" />
-        <div className={styles.icon_text}>SealChat</div>
+        <div className={styles.icon_text}>sealChat</div>
       </NavLink>
     </header>
   );
