@@ -49,6 +49,28 @@
   color: #ffffff;
 }
 
+.loginBlock {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.loginBlock a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.loginBlock a:hover {
+  background-color: #324e8e;
+}
+
 a {
   text-decoration: none;
 }

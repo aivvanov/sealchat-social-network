@@ -13,7 +13,7 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     currentSearchText: "",
-    isFetching: false
+    isFetching: false,
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -24,7 +24,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(user => {
                     if (user.id === action.userId) {
-                        return { ...user, isFollowed: true }
+                        return { ...user, followed: true }
                     }
                     return user;
                 })
@@ -34,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(user => {
                     if (user.id === action.userId) {
-                        return { ...user, isFollowed: false }
+                        return { ...user, followed: false }
                     }
                     return user;
                 })
