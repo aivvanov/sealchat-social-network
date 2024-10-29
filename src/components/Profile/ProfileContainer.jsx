@@ -10,14 +10,34 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = 2;
+            axios
+                .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+                    withCredentials: true
+                })
+                .then(response => {
+                    if (response.data.resultCode === 0) {
+                        userId = response.data.data.id;
+                        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`);
+                    }
+                })
+                .then(response => {
+                    if (response) {
+                        this.props.getUserProfile(response.data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Ошибка при запросе профиля", error);
+                });
+        } else {
+            axios
+                .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+                .then(response => {
+                    this.props.getUserProfile(response.data);
+                })
+                .catch(error => {
+                    console.error("Ошибка при запросе профиля", error);
+                });
         }
-
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                this.props.getUserProfile(response.data);
-            })
     }
 
     render() {

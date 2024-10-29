@@ -2,6 +2,7 @@ import React from "react";
 import styles from './Users.module.css';
 import userPhoto from '../../assets/images/userPhoto.jpeg';
 import { NavLink } from "react-router-dom";
+import axios from 'axios';
 
 const Users = (props) => {
 
@@ -13,6 +14,37 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
+
+    const follow = (userId) => {
+        axios
+            .post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+                withCredentials: true,
+                headers: {
+                    "API-KEY": "6f8b2bf3-1396-4c46-a59b-2eb0daccd9d7"
+                }
+            })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.follow(userId);
+                }
+            })
+    }
+
+    const unfollow = (userId) => {
+        axios
+            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+                withCredentials: true,
+                headers: {
+                    "API-KEY": "6f8b2bf3-1396-4c46-a59b-2eb0daccd9d7"
+                }
+            })
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    props.unfollow(userId);
+                }
+            })
+    }
+
 
     return (
         <div className={styles.users_container}>
@@ -33,9 +65,9 @@ const Users = (props) => {
                                 </div>
                             </div>
                             <div className={styles.action_button}>
-                                {user.followed
-                                    ? <button className={styles.unfollow_button} onClick={() => { props.unfollow(user.id) }}>Unfollow</button>
-                                    : <button className={styles.follow_button} onClick={() => { props.follow(user.id) }}>Follow</button>
+                                {!user.followed
+                                    ? <button className={styles.follow_button} onClick={() => { follow(user.id) }}>Follow</button>
+                                    : <button className={styles.unfollow_button} onClick={() => { unfollow(user.id) }}>Unfollow</button>
                                 }
                             </div>
                         </div>
