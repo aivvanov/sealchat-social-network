@@ -1,38 +1,34 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from 'axios';
 import { connect } from "react-redux";
 import { getUserProfile } from '../../redux/profile-reducer';
 import { withRouter } from '../../withRouter';
+import { profileAPI } from "../../api/api";
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
-            axios
-                .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-                    withCredentials: true
-                })
-                .then(response => {
-                    if (response.data.resultCode === 0) {
-                        userId = response.data.data.id;
-                        return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`);
+            profileAPI.auth()
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        userId = data.data.id;
+                        return profileAPI.getProfile(userId);
                     }
                 })
-                .then(response => {
-                    if (response) {
-                        this.props.getUserProfile(response.data);
+                .then(data => {
+                    if (data) {
+                        this.props.getUserProfile(data);
                     }
                 })
                 .catch(error => {
                     console.error("Ошибка при запросе профиля", error);
                 });
         } else {
-            axios
-                .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-                .then(response => {
-                    this.props.getUserProfile(response.data);
+            profileAPI.getProfile(userId)
+                .then(data => {
+                    this.props.getUserProfile(data);
                 })
                 .catch(error => {
                     console.error("Ошибка при запросе профиля", error);
