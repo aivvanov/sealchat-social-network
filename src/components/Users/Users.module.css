@@ -88,6 +88,14 @@
     background-color: #d32f2f;
 }
 
+.unfollow_button:disabled {
+    background-color: gray;
+}
+
+.follow_button:disabled {
+    background-color: gray;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -125,7 +133,7 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
-  }
+}
 
 .users_search input {
     width: 300px;

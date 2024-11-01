@@ -45,7 +45,7 @@ const ProfileInfo = (props) => {
                     )}
                     {props.profile.contacts.youtube && (
                         <a href={`https://${props.profile.contacts.youtube}`} className={styles.social_link}>
-                            <img src="https://static-00.iconduck.com/assets.00/youtube-icon-2048x2048-oa03jx3h.png" alt="youtube_link" />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5knh9Z_nqqcclpdK-Ba6nMuDTLxwuTAwZt2qcCuoEAviMlm0Qq0d8DZrMWcqUeWgePHM&usqp=CAU" alt="youtube_link" />
                         </a>
                     )}
                     {props.profile.contacts.facebook && (
