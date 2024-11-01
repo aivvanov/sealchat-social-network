@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, setUsers, unfollow, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching } from '../../redux/users-reducer';
+import { follow, setUsers, unfollow, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching, toggleFollowingProgress } from '../../redux/users-reducer';
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
 import SearchField from '../common/SearchField/SearchField';
@@ -65,6 +65,8 @@ class UsersContainer extends React.Component {
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
                     onPageChanged={this.onPageChanged}
+                    followingInProgress={this.props.followingInProgress}
+                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                 />
             }
         </>
@@ -78,10 +80,11 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         currentSearchText: state.usersPage.currentSearchText,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 };
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching
+    follow, unfollow, setUsers, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching, toggleFollowingProgress
 })(UsersContainer);
