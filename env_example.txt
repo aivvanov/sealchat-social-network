@@ -2,8 +2,8 @@ REACT_APP_TELEGRAM=@username
 REACT_APP_PHONE=+79777777777
 REACT_APP_API_KEY=11111111-2222-3333-4444-555555555555
 REACT_APP_API_BASE_URL=https://example.com/api/1.0/
-REACT_APP_GITHUB_LOGO_URL=https://example.com/
-REACT_APP_INSTAGRAM_LOGO_URL=https://example.com/
-REACT_APP_YOUTUBE_LOGO_URL=https://example.com/
-REACT_APP_FACEBOOK_LOGO_URL=https://example.com/
-REACT_APP_VK_LOGO_URL=https://example.com/
+REACT_APP_GITHUB_LOGO_URL=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmrGmeBv3SOLSKz6OlTVlVYkfH9_W3BBgdrA&s
+REACT_APP_INSTAGRAM_LOGO_URL=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png
+REACT_APP_YOUTUBE_LOGO_URL=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5knh9Z_nqqcclpdK-Ba6nMuDTLxwuTAwZt2qcCuoEAviMlm0Qq0d8DZrMWcqUeWgePHM&usqp=CAU
+REACT_APP_FACEBOOK_LOGO_URL=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX-PpRq5o99qLdwaOFS6H4qZO3oVGWQMcyDg&s
+REACT_APP_VK_LOGO_URL=https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Compact_Logo_%282021-present%29.svg/1024px-VK_Compact_Logo_%282021-present%29.svg.png
