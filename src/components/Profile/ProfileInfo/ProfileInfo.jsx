@@ -35,27 +35,27 @@ const ProfileInfo = (props) => {
                 <div className={styles.social_links}>
                     {props.profile.contacts.github && (
                         <a href={`https://${props.profile.contacts.github}`} className={styles.social_link}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmrGmeBv3SOLSKz6OlTVlVYkfH9_W3BBgdrA&s" alt="github_link" />
+                            <img src={process.env.REACT_APP_GITHUB_LOGO_URL} alt="github_link" />
                         </a>
                     )}
                     {props.profile.contacts.instagram && (
                         <a href={`https://${props.profile.contacts.instagram}`} className={styles.social_link}>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="instagram_link" />
+                            <img src={process.env.REACT_APP_INSTAGRAM_LOGO_URL} alt="instagram_link" />
                         </a>
                     )}
                     {props.profile.contacts.youtube && (
                         <a href={`https://${props.profile.contacts.youtube}`} className={styles.social_link}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5knh9Z_nqqcclpdK-Ba6nMuDTLxwuTAwZt2qcCuoEAviMlm0Qq0d8DZrMWcqUeWgePHM&usqp=CAU" alt="youtube_link" />
+                            <img src={process.env.REACT_APP_YOUTUBE_LOGO_URL} alt="youtube_link" />
                         </a>
                     )}
                     {props.profile.contacts.facebook && (
                         <a href={`https://${props.profile.contacts.facebook}`} className={styles.social_link}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX-PpRq5o99qLdwaOFS6H4qZO3oVGWQMcyDg&s" alt="facebook_link" />
+                            <img src={process.env.REACT_APP_FACEBOOK_LOGO_URL} alt="facebook_link" />
                         </a>
                     )}
                     {props.profile.contacts.vk && (
                         <a href={`https://${props.profile.contacts.vk}`} className={styles.social_link}>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Compact_Logo_%282021-present%29.svg/1024px-VK_Compact_Logo_%282021-present%29.svg.png" alt="vk_link" />
+                            <img src={process.env.REACT_APP_VK_LOGO_URL} alt="vk_link" />
                         </a>
                     )}
                 </div>
