@@ -16,7 +16,7 @@ const Dialogs = (props) => {
 
     const onMessageChange = (e) => {
         const text = e.target.value;
-        props.changeMessageText(text);
+        props.updateMessageText(text);
     }
 
     const newMessageElement = React.createRef();
