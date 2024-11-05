@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const GET_USER_PROFILE = 'GET-USER-PROFILE';
@@ -54,6 +56,36 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPost = () => ({ type: ADD_POST });
 export const updatePostText = (text) => ({ type: UPDATE_POST_TEXT, newPostText: text });
-export const getUserProfile = (profile) => ({ type: GET_USER_PROFILE, profile });
+export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, profile });
+
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        if (!userId) {
+            profileAPI.auth()
+                .then(data => {
+                    if (data.resultCode === 0) {
+                        userId = data.data.id;
+                        return profileAPI.getProfile(userId);
+                    }
+                })
+                .then(data => {
+                    if (data) {
+                        dispatch(getUserProfileSuccess(data));
+                    }
+                })
+                .catch(error => {
+                    console.error("Ошибка при запросе профиля", error);
+                });
+        } else {
+            profileAPI.getProfile(userId)
+                .then(data => {
+                    dispatch(getUserProfileSuccess(data));
+                })
+                .catch(error => {
+                    console.error("Ошибка при запросе профиля", error);
+                });
+        }
+    }
+}
 
 export default profileReducer;
