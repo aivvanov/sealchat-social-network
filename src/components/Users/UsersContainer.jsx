@@ -1,33 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, setUsers, unfollow, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching, toggleFollowingProgress } from '../../redux/users-reducer';
+import { follow, unfollow, setCurrentPage, setCurrentSearchText, getUsers, searchUsersRequest, changePage } from '../../redux/users-reducer';
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
 import SearchField from '../common/SearchField/SearchField';
-import { usersAPI } from '../../api/api';
 
 class UsersContainer extends React.Component {
 
     newMessageElement = React.createRef();
 
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
-            })
+        this.props.getUsers(this.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(page, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-            })
+        this.props.changePage(page, this.props.pageSize, this.props.currentSearchText);
     }
 
     onSearchUsersChange = (e) => {
@@ -36,15 +24,7 @@ class UsersContainer extends React.Component {
     }
 
     onSearchUsersClick = () => {
-        this.props.toggleIsFetching(true);
-        const userSearchText = this.props.currentSearchText;
-        usersAPI.searchUsersRequest(userSearchText, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
-            })
-        this.props.searchUsers()
+        this.props.searchUsersRequest(this.props.currentSearchText, this.props.pageSize);
     }
 
     render() {
@@ -86,5 +66,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalCount, setCurrentSearchText, searchUsers, toggleIsFetching, toggleFollowingProgress
+    follow, unfollow, setCurrentPage, setCurrentSearchText, getUsers, searchUsersRequest, changePage
 })(UsersContainer);

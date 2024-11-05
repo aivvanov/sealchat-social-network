@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = "SET-USERS";
@@ -50,7 +52,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_CURRENT_SEARCH_TEXT:
             return { ...state, currentSearchText: action.text }
         case SEARCH_USERS:
-            return { ...state, currentSearchText: "" }
+            return { ...state }
         case TOGGLE_IS_FETCHING:
             return { ...state, isFetching: action.isFetching }
         case TOGGLE_IS_FOLLOWING_PROGRESS:
@@ -74,5 +76,42 @@ export const setCurrentSearchText = (text) => ({ type: SET_CURRENT_SEARCH_TEXT, 
 export const searchUsers = () => ({ type: SEARCH_USERS });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items));
+                dispatch(setTotalCount(data.totalCount));
+            })
+    }
+}
+
+export const changePage = (page, pageSize, userSearchText) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(page));
+        dispatch(toggleIsFetching(true));
+        usersAPI.getSearchedUsers(page, pageSize, userSearchText)
+            .then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+            })
+    }
+}
+
+export const searchUsersRequest = (currentSearchText, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.searchUsersRequest(currentSearchText, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+                dispatch(setTotalCount(data.totalCount));
+            })
+        dispatch(searchUsers());
+    }
+}
 
 export default usersReducer;

@@ -19,6 +19,15 @@ export const usersAPI = {
                 return response.data;
             })
     },
+    getSearchedUsers(currentPage = 1, pageSize, userSearchText) {
+        return instance
+            .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}&term=${userSearchText}`, {
+                withCredentials: true
+            })
+            .then(response => {
+                return response.data;
+            })
+    },
     searchUsersRequest(userSearchText, pageSize) {
         return instance
             .get(`users?term=${userSearchText}&count=${pageSize}`)
