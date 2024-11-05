@@ -28,7 +28,7 @@ export const usersAPI = {
                 return response.data;
             })
     },
-    searchUsersRequest(userSearchText, pageSize) {
+    searchUsers(userSearchText, pageSize) {
         return instance
             .get(`users?term=${userSearchText}&count=${pageSize}`)
             .then(response => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setCurrentPage, setCurrentSearchText, getUsers, searchUsersRequest, changePage } from '../../redux/users-reducer';
+import { setCurrentPage, setCurrentSearchText, getUsers, searchUsers, changePage, toggleFollowingProgress, follow, unfollow } from '../../redux/users-reducer';
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
 import SearchField from '../common/SearchField/SearchField';
@@ -24,7 +24,7 @@ class UsersContainer extends React.Component {
     }
 
     onSearchUsersClick = () => {
-        this.props.searchUsersRequest(this.props.currentSearchText, this.props.pageSize);
+        this.props.searchUsers(this.props.currentSearchText, this.props.pageSize);
     }
 
     render() {
@@ -42,11 +42,10 @@ class UsersContainer extends React.Component {
                     totalUsersCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
                     pageSize={this.props.pageSize}
-                    unfollow={this.props.unfollow}
-                    follow={this.props.follow}
                     onPageChanged={this.onPageChanged}
                     followingInProgress={this.props.followingInProgress}
-                    toggleFollowingProgress={this.props.toggleFollowingProgress}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
                 />
             }
         </>
@@ -66,5 +65,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setCurrentPage, setCurrentSearchText, getUsers, searchUsersRequest, changePage
+    setCurrentPage, setCurrentSearchText, getUsers, searchUsers, changePage, toggleFollowingProgress, follow, unfollow
 })(UsersContainer);
