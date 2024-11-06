@@ -12,18 +12,14 @@ const instance = axios.create({
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize) {
         return instance
-            .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}`, {
-                withCredentials: true
-            })
+            .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}`)
             .then(response => {
                 return response.data;
             })
     },
     getSearchedUsers(currentPage = 1, pageSize, userSearchText) {
         return instance
-            .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}&term=${userSearchText}`, {
-                withCredentials: true
-            })
+            .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}&term=${userSearchText}`)
             .then(response => {
                 return response.data;
             })
@@ -55,9 +51,7 @@ export const usersAPI = {
 export const profileAPI = {
     auth() {
         return instance
-            .get(`auth/me`, {
-                withCredentials: true
-            })
+            .get(`auth/me`)
             .then(response => {
                 return response.data;
             });
