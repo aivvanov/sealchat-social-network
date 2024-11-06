@@ -55,7 +55,7 @@ export const usersAPI = {
 export const profileAPI = {
     auth() {
         return instance
-            .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            .get(`auth/me`, {
                 withCredentials: true
             })
             .then(response => {
@@ -64,7 +64,7 @@ export const profileAPI = {
     },
     getProfile(userId) {
         return instance
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+            .get(`profile/${userId}`)
             .then(response => {
                 return response.data
             });
