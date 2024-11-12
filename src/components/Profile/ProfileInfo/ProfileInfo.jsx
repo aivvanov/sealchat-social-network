@@ -32,8 +32,7 @@ const ProfileInfo = (props) => {
                     />
                 }
                 <div className={styles.user_name}>{props.profile.fullName}</div>
-                <div className={styles.user_description}>{props.profile.aboutMe}</div>
-                <ProfileStatus />
+                <ProfileStatus aboutMe={props.profile.aboutMe}/>
                 <div className={styles.social_links}>
                     {props.profile.contacts.github && (
                         <a href={`https://${props.profile.contacts.github}`} className={styles.social_link}>
