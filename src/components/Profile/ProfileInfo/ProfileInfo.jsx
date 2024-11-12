@@ -3,6 +3,7 @@ import styles from "./ProfileInfo.module.css";
 import Loader from "../../common/Loader/Loader";
 import profileBackground from '../../../assets/images/pexels_profile_background.jpg'
 import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -32,6 +33,7 @@ const ProfileInfo = (props) => {
                 }
                 <div className={styles.user_name}>{props.profile.fullName}</div>
                 <div className={styles.user_description}>{props.profile.aboutMe}</div>
+                <ProfileStatus />
                 <div className={styles.social_links}>
                     {props.profile.contacts.github && (
                         <a href={`https://${props.profile.contacts.github}`} className={styles.social_link}>
