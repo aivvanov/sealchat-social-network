@@ -25,8 +25,8 @@ class ProfileStatus extends React.Component {
                     <div onDoubleClick={this.activateEditMode.bind(this)} className={styles.user_description}>{this.props.aboutMe}</div>
                 }
                 {this.state.editMode &&
-                    <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.aboutMe} />
+                    <div className={styles.status_text}>
+                        <input type="text" className={styles.status_input} autoFocus onBlur={this.deactivateEditMode.bind(this)} value={this.props.aboutMe} />
                     </div>
                 }
             </div>
