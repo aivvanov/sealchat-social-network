@@ -1,15 +1,37 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
 
-const ProfileStatus = (props) => {
-    return (
-        <div>
-            {/* <div className={styles.user_description}>{props.profile.aboutMe}</div>
+class ProfileStatus extends React.Component {
+    state = {
+        editMode: false
+    }
+
+    activateEditMode() {
+        this.setState({
+            editMode: true
+        })
+    }
+
+    deactivateEditMode() {
+        this.setState({
+            editMode: false
+        })
+    }
+
+    render() {
+        return (
             <div>
-                <input value={props.profile.aboutMe} />
-            </div> */}
-        </div>
-    )
+                {!this.state.editMode &&
+                    <div onDoubleClick={this.activateEditMode.bind(this)} className={styles.user_description}>{this.props.aboutMe}</div>
+                }
+                {this.state.editMode &&
+                    <div className={styles.status_text}>
+                        <input type="text" className={styles.status_input} autoFocus onBlur={this.deactivateEditMode.bind(this)} value={this.props.aboutMe} />
+                    </div>
+                }
+            </div>
+        )
+    }
 }
 
 export default ProfileStatus;
