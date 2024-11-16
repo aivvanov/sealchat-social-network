@@ -48,18 +48,29 @@ export const usersAPI = {
 };
 
 export const profileAPI = {
-    auth() {
-        return instance
-            .get(`auth/me`)
-            .then(response => {
-                return response.data;
-            });
-    },
     getProfile(userId) {
         return instance
             .get(`profile/${userId}`)
             .then(response => {
                 return response.data
+            });
+    },
+    getStatus(userId) {
+        return instance
+            .get(`profile/status/${userId}`)
+    },
+    updateStatus() {
+        return instance
+            .put(`profile/status`)
+    }
+};
+
+export const authAPI = {
+    auth() {
+        return instance
+            .get(`auth/me`)
+            .then(response => {
+                return response.data;
             });
     }
 };
