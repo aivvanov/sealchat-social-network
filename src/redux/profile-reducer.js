@@ -3,6 +3,7 @@ import { authAPI, profileAPI } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const GET_USER_PROFILE = 'GET-USER-PROFILE';
+const SET_STATUS = "SET-STATUS";
 
 const initialState = {
     posts: [
@@ -18,7 +19,8 @@ const initialState = {
         }
     ],
     newPostText: "",
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -48,7 +50,12 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile: action.profile
-            }
+            };
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            };
         default:
             return state;
     }
@@ -57,6 +64,45 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = () => ({ type: ADD_POST });
 export const updatePostText = (text) => ({ type: UPDATE_POST_TEXT, newPostText: text });
 export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, profile });
+export const setStatus = (status) => ({ type: SET_STATUS, status });
+
+export const getStatus = (userId) => {
+    return (dispatch) => {
+        if (!userId) {
+            authAPI.auth()
+                .then(response => {
+                    if (response.resultCode === 0) {
+                        userId = response.data.id;
+                        return profileAPI.getStatus(userId);
+                    }
+                })
+                .then(response => {
+                    if (response) {
+                        dispatch(setStatus(response.data));
+                    }
+                })
+                .catch(error => {
+                    console.error("Ошибка при запросе статуса пользователя", error);
+                });
+        } else {
+            profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data));
+            });
+        }
+    }
+}
+
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status));
+                }
+            });
+    }
+}
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
