@@ -25,7 +25,7 @@ class ProfileStatus extends React.Component {
                     <div
                         onDoubleClick={this.activateEditMode}
                         className={styles.user_description}>
-                        {this.props.aboutMe}
+                        {!this.props.aboutMe && <div className={styles.no_status_text}>Set status... ✍️</div>}
                     </div>
                 }
                 {this.state.editMode &&

@@ -1,4 +1,4 @@
-import { profileAPI } from "../api/api";
+import { authAPI, profileAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
@@ -61,7 +61,7 @@ export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, pro
 export const getUserProfile = (userId) => {
     return (dispatch) => {
         if (!userId) {
-            profileAPI.auth()
+            authAPI.auth()
                 .then(data => {
                     if (data.resultCode === 0) {
                         userId = data.data.id;

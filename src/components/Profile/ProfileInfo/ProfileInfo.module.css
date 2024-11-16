@@ -121,3 +121,12 @@
   border-color: #2d47d9;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+.no_status_text {
+  font-size: 16px;
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  font-style: italic;
+}
