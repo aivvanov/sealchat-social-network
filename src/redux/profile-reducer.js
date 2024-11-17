@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const GET_USER_PROFILE = 'GET-USER-PROFILE';
 const SET_STATUS = "SET-STATUS";
+const UPDATE_STATUS_TEXT = "UPDATE-STATUS-TEXT";
 
 const initialState = {
     posts: [
@@ -20,7 +21,8 @@ const initialState = {
     ],
     newPostText: "",
     profile: null,
-    status: ""
+    status: "",
+    newStatusText: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -56,6 +58,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             };
+        case UPDATE_STATUS_TEXT:
+            return {
+                ...state,
+                newStatusText: action.newStatusText
+            }
         default:
             return state;
     }
@@ -65,6 +72,7 @@ export const addPost = () => ({ type: ADD_POST });
 export const updatePostText = (text) => ({ type: UPDATE_POST_TEXT, newPostText: text });
 export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
+export const updateStatusText = (newStatusText) => ({ type: UPDATE_STATUS_TEXT, newStatusText }); // подумать над надобностью
 
 export const getStatus = (userId) => {
     return (dispatch) => {
@@ -86,9 +94,9 @@ export const getStatus = (userId) => {
                 });
         } else {
             profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data));
-            });
+                .then(response => {
+                    dispatch(setStatus(response.data));
+                });
         }
     }
 }
