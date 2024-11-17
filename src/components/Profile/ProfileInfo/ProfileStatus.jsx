@@ -25,7 +25,7 @@ class ProfileStatus extends React.Component {
                     <div
                         onDoubleClick={this.activateEditMode}
                         className={styles.user_description}>
-                        {!this.props.aboutMe && <div className={styles.no_status_text}>Set status... ✍️</div>}
+                        {this.props.status ?  this.props.status : <div className={styles.no_status_text}>Set status... ✍️</div>}
                     </div>
                 }
                 {this.state.editMode &&
@@ -35,7 +35,7 @@ class ProfileStatus extends React.Component {
                             className={styles.status_input}
                             autoFocus
                             onBlur={this.deactivateEditMode}
-                            value={this.props.aboutMe}
+                            value={this.props.status}
                         />
                     </div>
                 }
