@@ -11,8 +11,6 @@ const Profile = (props) => {
         profile={props.profile}
         status={props.status}
         updateStatus={props.updateStatus}
-        updateStatusText={props.updateStatusText}
-        newStatusText={props.newStatusText}
       />
       <PostsContainer />
     </div>
