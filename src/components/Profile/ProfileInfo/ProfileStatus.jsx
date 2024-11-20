@@ -30,24 +30,31 @@ class ProfileStatus extends React.Component {
     render() {
         return (
             <div>
-                {!this.state.editMode &&
-                    <div
-                        onDoubleClick={this.activateEditMode}
-                        className={styles.user_description}>
-                        {this.props.status || <div className={styles.no_status_text}>Set status... ✍️</div>}
+                {this.props.authUserId === this.props.profile.userId
+                    ?
+                    <div>
+                        {!this.state.editMode &&
+                            <div
+                                onDoubleClick={this.activateEditMode}
+                                className={styles.user_description}>
+                                {this.props.status || <div className={styles.no_status_text}>Set status... ✍️</div>}
+                            </div>
+                        }
+                        {this.state.editMode &&
+                            <div className={styles.status_text}>
+                                <input
+                                    type="text"
+                                    className={styles.status_input}
+                                    autoFocus
+                                    onBlur={this.deactivateEditMode}
+                                    value={this.state.status}
+                                    onChange={this.onStatusChange}
+                                />
+                            </div>
+                        }
                     </div>
-                }
-                {this.state.editMode &&
-                    <div className={styles.status_text}>
-                        <input
-                            type="text"
-                            className={styles.status_input}
-                            autoFocus
-                            onBlur={this.deactivateEditMode}
-                            value={this.state.status}
-                            onChange={this.onStatusChange}
-                        />
-                    </div>
+                    :
+                    <div className={styles.no_status_text}>{this.props.status || <div className={styles.no_status_text}>No status</div>}</div>
                 }
             </div>
         )
