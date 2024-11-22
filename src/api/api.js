@@ -6,7 +6,6 @@ const instance = axios.create({
     headers: {
         "API-KEY": process.env.REACT_APP_API_KEY
     }
-
 });
 
 export const usersAPI = {
@@ -15,35 +14,35 @@ export const usersAPI = {
             .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}`)
             .then(response => {
                 return response.data;
-            })
+            });
     },
     getSearchedUsers(currentPage = 1, pageSize, userSearchText) {
         return instance
             .get(`users?page=${currentPage ? currentPage : 1}&count=${pageSize}&term=${userSearchText}`)
             .then(response => {
                 return response.data;
-            })
+            });
     },
     searchUsers(userSearchText, pageSize) {
         return instance
             .get(`users?term=${userSearchText}&count=${pageSize}`)
             .then(response => {
                 return response.data;
-            })
+            });
     },
     follow(userId) {
         return instance
             .post(`follow/${userId}`)
             .then(response => {
                 return response.data;
-            })
+            });
     },
     unfollow(userId) {
         return instance
             .delete(`follow/${userId}`)
             .then(response => {
                 return response.data;
-            })
+            });
     }
 };
 
