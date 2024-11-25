@@ -1,11 +1,11 @@
-.loginContainer {
+.login_container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-  }
-  
-  .formContainer {
+}
+
+.form_container {
     background-color: #fff;
     padding: 40px;
     border-radius: 8px;
@@ -13,23 +13,23 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 24px;
     color: #292d42;
     margin-bottom: 20px;
-  }
-  
-  .label {
+}
+
+.label {
     display: block;
     font-size: 14px;
     color: #606060;
     text-align: left;
     margin-bottom: 8px;
-  }
-  
-  .input {
+}
+
+.input {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -37,9 +37,9 @@
     border-radius: 4px;
     font-size: 16px;
     color: #333;
-  }
-  
-  .submitButton {
+}
+
+.submit_button {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -49,23 +49,43 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .submitButton:hover {
+}
+
+.submit_button:hover {
     background-color: #55619f;
-  }
-  
-  .signupLink {
+}
+
+.signup_link {
     margin-top: 20px;
     font-size: 14px;
     color: #606060;
-  }
-  
-  .signupLink a {
+}
+
+.signup_link a {
     color: #324e8e;
     text-decoration: none;
-  }
-  
-  .signupLink a:hover {
+}
+
+.signup_link a:hover {
     text-decoration: underline;
-  }
+}
+
+.remember_me_container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: #324e8e;
+    cursor: pointer;
+}
+
+.remember_me_label {
+    font-size: 14px;
+    color: #606060;
+    cursor: pointer;
+}
