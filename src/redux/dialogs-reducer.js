@@ -60,8 +60,7 @@ const initialState = {
             },
             createdAt: 1694860800000
         }
-    ],
-    newMessageText: ""
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -71,7 +70,7 @@ const dialogsReducer = (state = initialState, action) => {
             const messageId = ++(state.messages[state.messages.length - 1].id);
             const message = {
                 id: messageId,
-                text: state.newMessageText,
+                text: action.newMessageBody,
                 user: {
                     id: "2",
                     icon: "https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1",
@@ -97,7 +96,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessage = () => ({ type: SEND_MESSAGE });
+export const sendMessage = (newMessageBody) => ({ type: SEND_MESSAGE , newMessageBody });
 export const updateMessageText = (text) => ({ type: UPDATE_MESSAGE_TEXT, newMessageText: text });
 
 export default dialogsReducer;
