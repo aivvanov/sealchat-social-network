@@ -9,30 +9,30 @@ const LoginForm = (props) => {
             <label className={styles.label}>Login</label>
             <Field 
                 className={styles.input} 
-                placeholder={"Enter your login"} 
-                component={"input"} 
-                name={"login"} 
+                placeholder="Enter your login"
+                component="input"
+                name="login"
             />
             <label className={styles.label}>Password</label>
             <Field 
                 className={styles.input} 
-                placeholder={"Enter your password"} 
-                component={"input"} 
-                name={"password"} 
+                placeholder="Enter your password"
+                component="input"
+                name="password"
             />
             <div className={styles.remember_me_container}>
                 <Field
-                    type={"checkbox"}
-                    name={"rememberMe"}
-                    component={"input"}
+                    type="checkbox"
+                    name="rememberMe"
+                    component="input"
                     className={styles.checkbox}
-                    id={"rememberMe"}
+                    id="rememberMe"
                 />
                 <label htmlFor="rememberMe" className={styles.remember_me_label}>
                     Remember me?
                 </label>
             </div>
-            <button type={"submit"} className={styles.submit_button}>Log in</button>
+            <button type="submit" className={styles.submit_button}>Log in</button>
             <div className={styles.signup_link}>
                 Don't have an account? <NavLink to="/signup">Sign up</NavLink>
             </div>
