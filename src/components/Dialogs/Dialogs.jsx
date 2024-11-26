@@ -11,19 +11,8 @@ const Dialogs = (props) => {
     const messageElements = props.messages
         .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt} messageUserInfo={message.user} key={message.id} />);
 
-    const onSendMessage = (messageBody) => {
-        props.sendMessage(messageBody);
-    }
-
-    // const onMessageChange = (e) => {
-    //     const text = e.target.value;
-    //     props.updateMessageText(text);
-    // }
-
-    // const newMessageElement = React.createRef();
-
     const addNewMessage = (value) => {
-        onSendMessage(value.newMessageBody);
+        props.sendMessage(value.newMessageBody)
     }
 
     return (
@@ -48,13 +37,9 @@ const MessageForm = (props) => {
                 name="newMessageBody"
                 placeholder="Text message..."
                 className={styles.message_input}
-                // ref={newMessageElement}
-                // value={props.newMessageText}
-                // onChange={onMessageChange}
             />
             <button
                 className={styles.send_button}
-                // onClick={onSendMessage}
             >
                 Send
             </button>
