@@ -1,7 +1,6 @@
 import { authAPI, profileAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const GET_USER_PROFILE = 'GET-USER-PROFILE';
 const SET_STATUS = "SET-STATUS";
 
@@ -18,7 +17,6 @@ const initialState = {
             likesCount: 23
         }
     ],
-    newPostText: "",
     profile: null,
     status: ""
 }
@@ -27,24 +25,18 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            const postId = ++(state.posts[0].id);
-            const message = {
+            const postId = (state.posts[0].id) + 1;
+            const post = {
                 id: postId,
-                message: state.newPostText,
+                message: action.newPostBody,
                 likesCount: 0
             };
 
-            console.log(`Post with id ${message.id} was successfully created.`);
+            console.log(`Post with id ${post.id} was successfully created.`);
 
             return {
                 ...state,
-                posts: [message, ...state.posts],
-                newPostText: ''
-            };
-        case UPDATE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newPostText
+                posts: [post, ...state.posts],
             };
         case GET_USER_PROFILE:
             return {
@@ -61,8 +53,7 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = () => ({ type: ADD_POST });
-export const updatePostText = (text) => ({ type: UPDATE_POST_TEXT, newPostText: text });
+export const addPost = (newPostBody) => ({ type: ADD_POST, newPostBody });
 export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 
