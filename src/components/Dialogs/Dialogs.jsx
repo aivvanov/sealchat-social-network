@@ -38,11 +38,7 @@ const MessageForm = (props) => {
                 placeholder="Text message..."
                 className={styles.message_input}
             />
-            <button
-                className={styles.send_button}
-            >
-                Send
-            </button>
+            <button className={styles.send_button}>Send</button>
         </form>
     );
 }
