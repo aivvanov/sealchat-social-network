@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Login.module.css";
 import { Field, reduxForm } from "redux-form";
+import { Input } from "../common/FormsControls/FormsControls";
+import { required } from "../../utils/validators/validators";
 
 const LoginForm = (props) => {
     return (
@@ -10,21 +12,23 @@ const LoginForm = (props) => {
             <Field 
                 className={styles.input} 
                 placeholder="Enter your login"
-                component="input"
+                component={Input}
                 name="login"
+                validate={[required]}
             />
             <label className={styles.label}>Password</label>
             <Field 
                 className={styles.input} 
                 placeholder="Enter your password"
-                component="input"
+                component={Input}
                 name="password"
+                validate={[required]}
             />
             <div className={styles.remember_me_container}>
                 <Field
                     type="checkbox"
                     name="rememberMe"
-                    component="input"
+                    component={Input}
                     className={styles.checkbox}
                     id="rememberMe"
                 />
