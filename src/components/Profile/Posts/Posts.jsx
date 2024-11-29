@@ -33,7 +33,7 @@ const PostForm = (props) => {
         component={Textarea}
         name="newPostBody"
         placeholder="Add new post..."
-        validate={ [required, maxLengthCreator(10)] }
+        validate={ [required, maxLengthCreator(20)] }
       />
       <div>
         <button>Add post</button>
