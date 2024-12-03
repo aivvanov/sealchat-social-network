@@ -1,9 +1,35 @@
-.form_control.error input,
-.form_control.error textarea
-{
-    border: solid 1px red;
+.form_control {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 22px;
 }
-
+  
+.form_control textarea,
+.form_control input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+  
+.form_control textarea:focus,
+.form_control input:focus {
+    border-color: #324e8e;
+    box-shadow: 0 0 4px rgba(50, 78, 142, 0.5);
+    outline: none;
+}
+  
+.form_control.error textarea,
+.form_control.error input {
+    border-color: red;
+}
+  
 .form_control.error span {
     color: red;
+    font-size: 14px;
+    margin-top: 4px;
 }
