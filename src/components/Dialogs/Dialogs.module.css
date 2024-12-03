@@ -23,14 +23,6 @@
     padding: 10px;
 }
 
-.message_input_container {
-    grid-area: "i";
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    margin-left: 50px;
-}
-
 .message_input {
     width: 80%;
     height: 50px;
@@ -48,17 +40,42 @@
     border-color: #007bff;
 }
 
-.send_button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+.message_field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.message_field textarea {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    resize: vertical;
     font-size: 14px;
+    color: #4a4a4a;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.message_field button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #2d47d9;
+    color: #ffffff;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.send_button:hover {
-    background-color: #0056b3;
+.message_field button:hover {
+    background-color: #1a34b6;
+}
+
+.button_container {
+    display: flex;
+    justify-content: flex-start;
 }

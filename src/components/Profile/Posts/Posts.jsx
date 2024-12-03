@@ -28,7 +28,8 @@ const Posts = (props) => {
 const PostForm = (props) => {
 
   return (
-    <form onSubmit={props.handleSubmit} className={styles.post_items}>
+    <form onSubmit={props.handleSubmit}
+          className={styles.post_items}>
       <Field
         component={Textarea}
         name="newPostBody"
@@ -36,7 +37,7 @@ const PostForm = (props) => {
         validate={ [required, maxLengthCreator(20)] }
       />
       <div>
-        <button>Add post</button>
+        <button className={styles.send_button}>Add post</button>
       </div>
     </form>
   );

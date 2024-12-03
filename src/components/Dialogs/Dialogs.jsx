@@ -33,18 +33,20 @@ const Dialogs = (props) => {
 
 const MessageForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit} className={styles.message_input_container}>
+        <form onSubmit={props.handleSubmit} className={styles.message_field}>
             <Field
                 component={Textarea}
                 name="newMessageBody"
                 placeholder="Text message..."
                 className={styles.message_input}
-                validate={ [required, maxLengthCreator(50)] }
+                validate={[required, maxLengthCreator(50)]}
             />
-            <button className={styles.send_button}>Send</button>
+            <div className={styles.button_container}>
+                <button type="submit">Send</button>
+            </div>
         </form>
     );
-}
+};
 
 const MessageFormRedux = reduxForm({
     form: "dialogMessageForm"
