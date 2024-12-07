@@ -32,7 +32,7 @@
 .input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
@@ -88,4 +88,8 @@
     font-size: 14px;
     color: #606060;
     cursor: pointer;
+}
+
+.field_input {
+    margin-bottom: 20px;
 }

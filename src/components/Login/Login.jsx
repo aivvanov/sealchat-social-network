@@ -9,21 +9,25 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <label className={styles.label}>Login</label>
-            <Field 
-                className={styles.input} 
-                placeholder="Enter your login"
-                component={Input}
-                name="login"
-                validate={[required]}
-            />
+            <div className={styles.field_input}>
+                <Field
+                    className={styles.input}
+                    placeholder="Enter your login"
+                    component={Input}
+                    name="login"
+                    validate={[required]}
+                />
+            </div>
             <label className={styles.label}>Password</label>
-            <Field 
-                className={styles.input} 
-                placeholder="Enter your password"
-                component={Input}
-                name="password"
-                validate={[required]}
-            />
+            <div className={styles.field_input}>
+                <Field
+                    className={styles.input}
+                    placeholder="Enter your password"
+                    component={Input}
+                    name="password"
+                    validate={[required]}
+                />
+            </div>
             <div className={styles.remember_me_container}>
                 <Field
                     type="checkbox"
