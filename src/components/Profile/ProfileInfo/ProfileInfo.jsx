@@ -4,8 +4,13 @@ import Loader from "../../common/Loader/Loader";
 import profileBackground from '../../../assets/images/pexels_profile_background.jpg'
 import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
 import ProfileStatus from "./ProfileStatus";
+import { Navigate } from "react-router-dom";
 
 const ProfileInfo = (props) => {
+
+    if (!props.isAuth) {
+        return <Navigate to='/login' />
+    }
 
     if (!props.profile) {
         return <Loader />
