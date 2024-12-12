@@ -1,7 +1,8 @@
 import React from "react";
 import styles from './Header.module.css';
 import { NavLink } from "react-router-dom";
-import headerIcon from "../../assets/images/seals_header.svg"
+import headerIcon from "../../assets/images/seals_header.svg";
+import { IoLogOutOutline } from "react-icons/io5";
 
 const Header = (props) => {
   return (
@@ -11,13 +12,17 @@ const Header = (props) => {
         <div className={styles.icon_text}>sealChat</div>
       </NavLink>
       <div className={styles.loginBlock}>
-        {props.isAuth
-          ? <div>{props.login}</div>
-          : <NavLink to="/login">Log in</NavLink>
-        }
+        {props.isAuth ? (
+          <div className={styles.authBlock}>
+            <span className={styles.login}>{props.login}</span>
+            <IoLogOutOutline className={styles.logoutIcon} onClick={props.logout} title="Log out" />
+          </div>
+        ) : (
+          <NavLink to="/login">Log in</NavLink>
+        )}
       </div>
     </header>
   );
-}
+};
 
 export default Header;
