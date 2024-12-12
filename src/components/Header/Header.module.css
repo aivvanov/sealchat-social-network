@@ -57,6 +57,9 @@
   font-size: 16px;
   font-weight: 500;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .loginBlock a {
@@ -69,6 +72,29 @@
 
 .loginBlock a:hover {
   background-color: #324e8e;
+}
+
+.authBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.logoutIcon {
+  font-size: 22px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.logoutIcon:hover {
+  color: #e74c3c;
+  transform: scale(1.1);
 }
 
 a {
