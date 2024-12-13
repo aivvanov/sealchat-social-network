@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 5px;
     margin-right: 22px;
+    justify-content: center;
 }
   
 .form_control textarea,
@@ -32,4 +33,11 @@
     color: red;
     font-size: 14px;
     margin-top: 4px;
+}
+
+.form_summary_error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+    padding-bottom: 10px;
 }
