@@ -6,6 +6,7 @@ import { Input } from "../common/FormsControls/FormsControls";
 import { required } from "../../utils/validators/validators";
 import { connect } from 'react-redux';
 import { login, logout } from "../../redux/auth-reducer";
+import style from "../common/FormsControls/FormsControls.module.css";
 
 const LoginForm = (props) => {
     return (
@@ -43,6 +44,10 @@ const LoginForm = (props) => {
                     Remember me?
                 </label>
             </div>
+            {props.error && <div className={style.form_summary_error}>
+                {props.error}
+            </div>
+            }
             <button type="submit" className={styles.submit_button}>Log in</button>
             <div className={styles.signup_link}>
                 Don't have an account? <NavLink to="/signup">Sign up</NavLink>
