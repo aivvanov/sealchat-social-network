@@ -4,7 +4,6 @@ import { setCurrentPage, setCurrentSearchText, getUsers, searchUsers, changePage
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
 import SearchField from '../common/SearchField/SearchField';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
 class UsersContainer extends React.Component {
@@ -67,7 +66,7 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-    withAuthRedirect,
+    //withAuthRedirect,
     connect(mapStateToProps, {
         setCurrentPage, setCurrentSearchText, getUsers, 
         searchUsers, changePage, toggleFollowingProgress, 

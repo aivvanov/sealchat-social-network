@@ -12,18 +12,24 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect } from 'react-redux';
-import { auth } from './redux/auth-reducer';
 import { withRouter } from './withRouter';
 import { compose } from 'redux';
+import { initializeApp } from './redux/app-reducer';
+import Loader from './components/common/Loader/Loader';
 // import { Footer } from './components/Footer/Footer';
 
 
 class App extends Component {
   componentDidMount() {
-    this.props.auth();
+    this.props.initializeApp();
   }
 
   render() {
+
+    if (!this.props.initialized) {
+      return <Loader />
+    }
+
     return (
       <div className='app-wrapper'>
         <HeaderContainer />
@@ -46,6 +52,11 @@ class App extends Component {
   };
 }
 
+
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
 export default compose(
   withRouter,
-  connect(null, {auth}))(App);
+  connect(mapStateToProps, { initializeApp }))(App);
