@@ -25,16 +25,14 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (userId, login, email, isAuth) => ({ type: SET_USER_DATA, data: { userId, login, email, isAuth } });
 
-export const auth = () => {
-    return (dispatch) => {
-        authAPI.auth()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    const { id, login, email } = data.data;
-                    dispatch(setAuthUserData(id, login, email, true));
-                }
-            })
-    }
+export const auth = () => (dispatch) => {
+    return authAPI.auth()
+        .then(data => {
+            if (data.resultCode === 0) {
+                const { id, login, email } = data.data;
+                dispatch(setAuthUserData(id, login, email, true));
+            }
+        })
 }
 
 export const login = (email, password, rememberMe) => {
@@ -45,7 +43,7 @@ export const login = (email, password, rememberMe) => {
                     dispatch(auth());
                 } else {
                     const message = data.messages.length > 0 ? data.messages[0] : "Unknown error"
-                    const action = stopSubmit("login", {_error: message});
+                    const action = stopSubmit("login", { _error: message });
                     dispatch(action);
                 }
             })
