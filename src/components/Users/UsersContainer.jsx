@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrentPage, setCurrentSearchText, getUsers, searchUsers, changePage, toggleFollowingProgress, follow, unfollow } from '../../redux/users-reducer';
+import { setCurrentPage, setCurrentSearchText, requestUsers, searchUsers, changePage, toggleFollowingProgress, follow, unfollow } from '../../redux/users-reducer';
 import Users from './Users';
 import Loader from '../common/Loader/Loader';
-import SearchField from '../common/SearchField/SearchField';
-import { compose } from 'redux';
+import SearchField from '../common/SearchField/SearchField';import { compose } from 'redux';
+import { getCurrentPage, getCurrentSearchText, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../redux/users-selectors';
 
 class UsersContainer extends React.Component {
 
     newMessageElement = React.createRef();
 
     componentDidMount() {
-        this.props.getUsers(this.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (page) => {
@@ -53,22 +53,34 @@ class UsersContainer extends React.Component {
     }
 }
 
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         currentSearchText: state.usersPage.currentSearchText,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// };
+
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        currentSearchText: state.usersPage.currentSearchText,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        currentSearchText: getCurrentSearchText(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 };
 
 export default compose(
     //withAuthRedirect,
     connect(mapStateToProps, {
-        setCurrentPage, setCurrentSearchText, getUsers, 
+        setCurrentPage, setCurrentSearchText, requestUsers, 
         searchUsers, changePage, toggleFollowingProgress, 
         follow, unfollow
     })
