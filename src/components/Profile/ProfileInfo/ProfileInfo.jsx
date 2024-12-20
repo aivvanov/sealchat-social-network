@@ -3,8 +3,8 @@ import styles from "./ProfileInfo.module.css";
 import Loader from "../../common/Loader/Loader";
 import profileBackground from '../../../assets/images/pexels_profile_background.jpg'
 import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
-import ProfileStatus from "./ProfileStatus";
 import { Navigate } from "react-router-dom";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
 
@@ -37,7 +37,8 @@ const ProfileInfo = (props) => {
                     />
                 }
                 <div className={styles.user_name}>{props.profile.fullName}</div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus} authUserId={props.authUserId} profile={props.profile} />
+                {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus} authUserId={props.authUserId} profile={props.profile} /> */}
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} authUserId={props.authUserId} profile={props.profile} />
                 <div className={styles.social_links}>
                     {props.profile.contacts.github && (
                         <a href={`https://${props.profile.contacts.github}`} className={styles.social_link}>
