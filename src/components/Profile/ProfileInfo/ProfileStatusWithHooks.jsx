@@ -21,27 +21,32 @@ const ProfileStatusWithHooks = (props) => {
 
     return (
         <div>
-            <div>
-                {!editMode &&
-                    <div
-                        onDoubleClick={activateEditMode}
-                        className={styles.user_description}>
-                        {props.status || <div className={styles.no_status_text}>Set status... ✍️</div>}
-                    </div>
-                }
-                {editMode &&
-                    <div className={styles.status_text}>
-                        <input
-                            type="text"
-                            className={styles.status_input}
-                            value={status}
-                            autoFocus
-                            onBlur={deactivateEditMode}
-                            onChange={onStatusChange}
-                        />
-                    </div>
-                }
-            </div>
+            {props.authUserId === props.profile.userId
+                ?
+                <div>
+                    {!editMode &&
+                        <div
+                            onDoubleClick={activateEditMode}
+                            className={styles.user_description}>
+                            {props.status || <div className={styles.no_status_text}>Set status... ✍️</div>}
+                        </div>
+                    }
+                    {editMode &&
+                        <div className={styles.status_text}>
+                            <input
+                                type="text"
+                                className={styles.status_input}
+                                value={status}
+                                autoFocus
+                                onBlur={deactivateEditMode}
+                                onChange={onStatusChange}
+                            />
+                        </div>
+                    }
+                </div>
+                :
+                <div className={styles.no_status_text}>{this.props.status || <div className={styles.no_status_text}>No status</div>}</div>
+            }
         </div>
     )
 }
