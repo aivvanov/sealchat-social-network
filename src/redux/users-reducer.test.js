@@ -1,4 +1,4 @@
-import usersReducer, { followSuccess, setCurrentPage, setCurrentSearchText, setTotalCount, setUsers, unfollowSuccess } from "./users-reducer";
+import usersReducer, { followSuccess, setCurrentPage, setCurrentSearchText, setTotalCount, setUsers, toggleFollowingProgress, toggleIsFetching, unfollowSuccess } from "./users-reducer";
 
 const state = {
     users: [
@@ -68,4 +68,22 @@ it('users total count should be equal to 30', () => {
     let newState = usersReducer(state, action);
     // 3. expectation
     expect(newState.totalUsersCount).toBe(30);
+});
+
+it('toggleIsFetching flag should be true', () => {
+    // 1. test data
+    let action = toggleIsFetching(true);
+    // 2. action
+    let newState = usersReducer(state, action);
+    // 3. expectation
+    expect(newState.isFetching).toBe(true);
+});
+
+it(`following in progress user's id should be added to FollowingInProgress array`, () => {
+    // 1. test data
+    let action = toggleFollowingProgress(true, 123);
+    // 2. action
+    let newState = usersReducer(state, action);
+    // 3. expectation
+    expect(newState.followingInProgress[0]).toBe(123);
 });
