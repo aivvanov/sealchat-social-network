@@ -1,9 +1,9 @@
 import { authAPI, profileAPI } from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const GET_USER_PROFILE = 'GET-USER-PROFILE';
-const SET_STATUS = "SET-STATUS";
-const DELETE_POST = "DELETE-POST";
+const ADD_POST = 'sealchat/profile/ADD-POST';
+const GET_USER_PROFILE = 'sealchat/profile/GET-USER-PROFILE';
+const SET_STATUS = "sealchat/profile/SET-STATUS";
+const DELETE_POST = "sealchat/profile/DELETE-POST";
 
 const initialState = {
     posts: [
@@ -91,14 +91,11 @@ export const getStatus = (userId) => {
     }
 }
 
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status));
-                }
-            });
+export const updateStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.updateStatus(status);
+
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
     }
 }
 
