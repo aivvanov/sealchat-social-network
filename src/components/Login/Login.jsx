@@ -1,51 +1,32 @@
 import React from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import styles from "./Login.module.css";
-import { Field, reduxForm } from "redux-form";
-import { Input } from "../common/FormsControls/FormsControls";
+import { reduxForm } from "redux-form";
+import { createField, Input } from "../common/FormsControls/FormsControls";
 import { required } from "../../utils/validators/validators";
 import { connect } from 'react-redux';
 import { login, logout } from "../../redux/auth-reducer";
 import style from "../common/FormsControls/FormsControls.module.css";
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <label className={styles.label}>Email</label>
             <div className={styles.field_input}>
-                <Field
-                    className={styles.input}
-                    placeholder="Enter your email"
-                    component={Input}
-                    name="email"
-                    validate={[required]}
-                />
+                {createField("Enter your email", "email", [required], Input, styles.input)}
             </div>
             <label className={styles.label}>Password</label>
             <div className={styles.field_input}>
-                <Field
-                    className={styles.input}
-                    placeholder="Enter your password"
-                    component={Input}
-                    name="password"
-                    type="password"
-                    validate={[required]}
-                />
+                {createField("Enter your password", "password", [required], Input, styles.input, { type: "password" })}
             </div>
             <div className={styles.remember_me_container}>
-                <Field
-                    type="checkbox"
-                    name="rememberMe"
-                    component={Input}
-                    className={styles.checkbox}
-                    id="rememberMe"
-                />
+                {createField(null, "rememberMe", [], Input, styles.checkbox, { id: "rememberMe", type: "checkbox" })}
                 <label htmlFor="rememberMe" className={styles.remember_me_label}>
                     Remember me?
                 </label>
             </div>
-            {props.error && <div className={style.form_summary_error}>
-                {props.error}
+            {error && <div className={style.form_summary_error}>
+                {error}
             </div>
             }
             <button type="submit" className={styles.submit_button}>Log in</button>
