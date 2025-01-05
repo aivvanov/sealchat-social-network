@@ -11,12 +11,14 @@ class UsersContainer extends React.Component {
     newMessageElement = React.createRef();
 
     componentDidMount() {
-        this.props.requestUsers(this.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
-        this.props.changePage(page, this.props.pageSize, this.props.currentSearchText);
+        const {pageSize, currentSearchText} = this.props;
+        this.props.changePage(page, pageSize, currentSearchText);
     }
 
     onSearchUsersChange = (e) => {
@@ -25,7 +27,8 @@ class UsersContainer extends React.Component {
     }
 
     onSearchUsersClick = () => {
-        this.props.searchUsers(this.props.currentSearchText, this.props.pageSize);
+        const {searchUsers, currentSearchText, pageSize} = this.props;
+        searchUsers(currentSearchText, pageSize);
     }
 
     render() {
