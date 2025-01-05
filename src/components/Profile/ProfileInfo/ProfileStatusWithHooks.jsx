@@ -49,7 +49,7 @@ const ProfileStatusWithHooks = (props) => {
                     }
                 </div>
                 :
-                <div className={styles.no_status_text}>{this.props.status || <div className={styles.no_status_text}>No status</div>}</div>
+                <div className={styles.no_status_text}>{props.status || <div className={styles.no_status_text}>No status</div>}</div>
             }
         </div>
     )
