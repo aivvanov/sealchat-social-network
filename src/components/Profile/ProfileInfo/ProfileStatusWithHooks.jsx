@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileInfo.module.css";
 
-const ProfileStatusWithHooks = (props) => {
+const ProfileStatusWithHooks = ({ authUserId, updateStatus, profile, ...props }) => {
 
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status);
@@ -16,7 +16,7 @@ const ProfileStatusWithHooks = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        props.updateStatus(status);
+        updateStatus(status);
     }
 
     const onStatusChange = (e) => {
@@ -25,7 +25,7 @@ const ProfileStatusWithHooks = (props) => {
 
     return (
         <div>
-            {props.authUserId === props.profile.userId
+            {authUserId === profile.userId
                 ?
                 <div>
                     {!editMode &&

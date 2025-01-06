@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import headerIcon from "../../assets/images/seals_header.svg";
 import { IoLogOutOutline } from "react-icons/io5";
 
-const Header = (props) => {
+const Header = ({ isAuth, login, logout }) => {
   return (
     <header className={styles.header}>
       <NavLink to="/profile" className={styles.icon_container}>
@@ -12,10 +12,10 @@ const Header = (props) => {
         <div className={styles.icon_text}>sealChat</div>
       </NavLink>
       <div className={styles.loginBlock}>
-        {props.isAuth ? (
+        {isAuth ? (
           <div className={styles.authBlock}>
-            <span className={styles.login}>{props.login}</span>
-            <IoLogOutOutline className={styles.logoutIcon} onClick={props.logout} title="Log out" />
+            <span className={styles.login}>{login}</span>
+            <IoLogOutOutline className={styles.logoutIcon} onClick={logout} title="Log out" />
           </div>
         ) : (
           <NavLink to="/login">Log in</NavLink>

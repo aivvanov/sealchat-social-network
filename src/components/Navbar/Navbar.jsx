@@ -3,10 +3,10 @@ import styles from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
 import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers } from 'react-icons/fa';
 
-const Navbar = (props) => {
+const Navbar = ({ dialogs }) => {
   const telegram = process.env.REACT_APP_TELEGRAM;
   const phone = process.env.REACT_APP_PHONE;
-  const userImages = props.dialogs
+  const userImages = dialogs
     .map(image => <img src={image.icon} key={image.id} alt="userImage" />);
 
   return (
