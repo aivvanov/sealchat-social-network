@@ -5,13 +5,13 @@ import { Field, reduxForm } from "redux-form";
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 
-const Posts = React.memo((props) => {
+const Posts = React.memo(({ posts, addPost }) => {
 
-  const postElements = props.posts
+  const postElements = posts
     .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id} />);
 
   const addNewPost = (value) => {
-    props.addPost(value.newPostBody);
+    addPost(value.newPostBody);
   }
 
   return (
@@ -25,16 +25,16 @@ const Posts = React.memo((props) => {
   );
 })
 
-const PostForm = (props) => {
+const PostForm = ({ handleSubmit }) => {
 
   return (
-    <form onSubmit={props.handleSubmit}
-          className={styles.post_items}>
+    <form onSubmit={handleSubmit}
+      className={styles.post_items}>
       <Field
         component={Textarea}
         name="newPostBody"
         placeholder="Add new post..."
-        validate={ [required, maxLengthCreator(20)] }
+        validate={[required, maxLengthCreator(20)]}
       />
       <div>
         <button className={styles.send_button}>Add post</button>

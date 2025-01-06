@@ -6,15 +6,15 @@ import { Field, reduxForm } from "redux-form";
 import { Textarea } from "../common/FormsControls/FormsControls";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
 
-const Dialogs = (props) => {
-    const dialogElements = props.dialogs
+const Dialogs = ({ dialogs, messages, sendMessage }) => {
+    const dialogElements = dialogs
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} key={dialog.id} />);
 
-    const messageElements = props.messages
+    const messageElements = messages
         .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt} messageUserInfo={message.user} key={message.id} />);
 
     const addNewMessage = (value) => {
-        props.sendMessage(value.newMessageBody)
+        sendMessage(value.newMessageBody)
     }
 
     return (
@@ -31,9 +31,9 @@ const Dialogs = (props) => {
     )
 }
 
-const MessageForm = (props) => {
+const MessageForm = ({ handleSubmit }) => {
     return (
-        <form onSubmit={props.handleSubmit} className={styles.message_field}>
+        <form onSubmit={handleSubmit} className={styles.message_field}>
             <Field
                 component={Textarea}
                 name="newMessageBody"

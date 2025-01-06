@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./FormsControls.module.css";
 import { Field } from "redux-form";
 
-const FormControl = ({ input, meta: {touched, error}, children }) => {
+const FormControl = ({ input, meta: { touched, error }, children }) => {
 
     const hasError = touched && error;
 
@@ -35,4 +35,10 @@ export const createField = (placeholder, name, validators, component, className,
         validate={validators}
         {...props}
     />
+}
+
+export const createLink = (profile, LinkType, linkAdress) => {
+    return <a href={`https://${profile.contacts}.${LinkType}`} className={styles.social_link}>
+        <img src={linkAdress} alt={`${LinkType}_link`} />
+    </a>
 }

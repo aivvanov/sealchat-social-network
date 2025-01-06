@@ -55,17 +55,6 @@
   gap: 15px;
 }
 
-.social_link img {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  transition: transform 0.2s;
-}
-
-.social_link img:hover {
-  transform: scale(1.1);
-}
-
 .job_info {
   margin-top: 15px;
   text-align: center;

@@ -5,8 +5,26 @@ import profileBackground from '../../../assets/images/pexels_profile_background.
 import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
 import { Navigate } from "react-router-dom";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import { createLink } from "../../common/FormsControls/FormsControls";
 
 const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId }) => {
+
+    const createAppLink = (profile) => {
+        if (!profile.contacts) {
+            return null;
+        }
+
+        const links = [];
+        for (var key in profile.contacts) {
+            if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
+                const linkAdress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
+                if (linkAdress) {
+                    links.push(createLink(profile, key, linkAdress));
+                }
+            }
+        }
+        return links.length ? links : null;
+    }
 
     if (!isAuth) {
         return <Navigate to='/login' />
@@ -40,31 +58,7 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId }) => {
                 {/* <ProfileStatus status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} /> */}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} />
                 <div className={styles.social_links}>
-                    {profile.contacts.github && (
-                        <a href={`https://${profile.contacts.github}`} className={styles.social_link}>
-                            <img src={process.env.REACT_APP_GITHUB_LOGO_URL} alt="github_link" />
-                        </a>
-                    )}
-                    {profile.contacts.instagram && (
-                        <a href={`https://${profile.contacts.instagram}`} className={styles.social_link}>
-                            <img src={process.env.REACT_APP_INSTAGRAM_LOGO_URL} alt="instagram_link" />
-                        </a>
-                    )}
-                    {profile.contacts.youtube && (
-                        <a href={`https://${profile.contacts.youtube}`} className={styles.social_link}>
-                            <img src={process.env.REACT_APP_YOUTUBE_LOGO_URL} alt="youtube_link" />
-                        </a>
-                    )}
-                    {profile.contacts.facebook && (
-                        <a href={`https://${profile.contacts.facebook}`} className={styles.social_link}>
-                            <img src={process.env.REACT_APP_FACEBOOK_LOGO_URL} alt="facebook_link" />
-                        </a>
-                    )}
-                    {profile.contacts.vk && (
-                        <a href={`https://${profile.contacts.vk}`} className={styles.social_link}>
-                            <img src={process.env.REACT_APP_VK_LOGO_URL} alt="vk_link" />
-                        </a>
-                    )}
+                    {createAppLink(profile)}
                 </div>
                 <div className={styles.job_info}>
                     <div className={`${styles.job_status} ${profile.lookingForAJob ? styles.looking_for_job : styles.not_looking_for_job}`}>
