@@ -14,7 +14,7 @@ const state = {
     followingInProgress: []
 }
 
-it('user should be followed', () => {
+test('user should be followed', () => {
     // 1. test data
     let action = followSuccess(2);
     // 2. action
@@ -24,7 +24,7 @@ it('user should be followed', () => {
     expect(followedUser.followed).toBe(true);
 });
 
-it('user should be unfollowed', () => {
+test('user should be unfollowed', () => {
     // 1. test data
     let action = unfollowSuccess(3);
     // 2. action
@@ -34,7 +34,7 @@ it('user should be unfollowed', () => {
     expect(unfollowedUser.followed).toBe(false);
 });
 
-it('users list length should be equal to 1', () => {
+test('users list length should be equal to 1', () => {
     // 1. test data
     let action = setUsers([{ id: 456, name: "NewUser1", followed: false }]);
     // 2. action
@@ -43,7 +43,7 @@ it('users list length should be equal to 1', () => {
     expect(newState.users.length).toBe(1);
 });
 
-it('current page shold be equal to 10', () => {
+test('current page shold be equal to 10', () => {
     // 1. test data
     let action = setCurrentPage(10);
     // 2. action
@@ -52,7 +52,7 @@ it('current page shold be equal to 10', () => {
     expect(newState.currentPage).toBe(10);
 });
 
-it(`current search text should be equal to 'Test search text'`, () => {
+test(`current search text should be equal to 'Test search text'`, () => {
     // 1. test data
     let action = setCurrentSearchText('Test search text');
     // 2. action
@@ -61,7 +61,7 @@ it(`current search text should be equal to 'Test search text'`, () => {
     expect(newState.currentSearchText).toBe('Test search text');
 });
 
-it('users total count should be equal to 30', () => {
+test('users total count should be equal to 30', () => {
     // 1. test data
     let action = setTotalCount(30);
     // 2. action
@@ -70,7 +70,7 @@ it('users total count should be equal to 30', () => {
     expect(newState.totalUsersCount).toBe(30);
 });
 
-it('toggleIsFetching flag should be true', () => {
+test('toggleIsFetching flag should be true', () => {
     // 1. test data
     let action = toggleIsFetching(true);
     // 2. action
@@ -79,7 +79,7 @@ it('toggleIsFetching flag should be true', () => {
     expect(newState.isFetching).toBe(true);
 });
 
-it(`following in progress user's id should be added to FollowingInProgress array`, () => {
+test(`following in progress user's id should be added to FollowingInProgress array`, () => {
     // 1. test data
     let action = toggleFollowingProgress(true, 123);
     // 2. action

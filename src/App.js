@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Info from './components/Info/Info';
 import News from './components/News/News';
@@ -11,11 +11,12 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { withRouter } from './withRouter';
 import { compose } from 'redux';
 import { initializeApp } from './redux/app-reducer';
 import Loader from './components/common/Loader/Loader';
+import store from './redux/redux-store';
 // import { Footer } from './components/Footer/Footer';
 
 
@@ -57,6 +58,18 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized
 })
 
-export default compose(
+const AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { initializeApp }))(App);
+
+const SealChatApp = (props) => {
+  return <BrowserRouter>
+    <React.StrictMode>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </React.StrictMode>
+  </BrowserRouter>
+}
+
+export default SealChatApp;
