@@ -35,7 +35,7 @@ const state = {
     ]
 }
 
-it('length of messages should be incremented', () => {
+test('length of messages should be incremented', () => {
     // 1. test data
     let action = sendMessage("Test message body");
     // 2. action

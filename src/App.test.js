@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import SealChatApp from './App';
+import { createRoot } from 'react-dom/client';
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+test('render without crushing', () => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    root.render(<SealChatApp />);
+    root.unmount();
+});

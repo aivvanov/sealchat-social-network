@@ -7,7 +7,7 @@ const state = {
     isAuth: false
 };
 
-it(`state user's data should be equal to input user's object`, () => {
+test(`state user's data should be equal to input user's object`, () => {
     // 1. test data
     const testUser = { userId: 123, login: "testUser", email: "example@gmail.com", isAuth: true };
     const { userId, login, email, isAuth } = testUser;

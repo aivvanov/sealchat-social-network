@@ -15,7 +15,7 @@ const state = {
     ]
 };
 
-it('length of posts should be incremented', () => {
+test('length of posts should be incremented', () => {
     // 1. test data
     let action = addPost("Test post message");
     // 2. action
@@ -24,7 +24,7 @@ it('length of posts should be incremented', () => {
     expect(newState.posts.length).toBe(3);
 });
 
-it('message of post should be correct', () => {
+test('message of post should be correct', () => {
     // 1. test data
     let action = addPost("Test post message");
     // 2. action
@@ -33,7 +33,7 @@ it('message of post should be correct', () => {
     expect(newState.posts[0].message).toBe("Test post message");
 });
 
-it('After deleting length of post should be decremented', () => {
+test('After deleting length of post should be decremented', () => {
     // 1. test data
     let action = deletePost(1);
     // 2. action
@@ -42,7 +42,7 @@ it('After deleting length of post should be decremented', () => {
     expect(newState.posts.length).toBe(1);
 });
 
-it(`After deleting post with incorrect id, post length should't be decremented`, () => {
+test(`After deleting post with incorrect id, post length should't be decremented`, () => {
     // 1. test data
     let action = deletePost(12345);
     // 2. action
