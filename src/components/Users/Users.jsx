@@ -8,7 +8,7 @@ const Users = ({ totalUsersCount, pageSize, currentPage, onPageChanged, users, f
     return (
         <div className={styles.users_container}>
             {users.map(user => <User user={user} followingInProgress={followingInProgress} {...props} />)}
-            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />
+            <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />
         </div>
     );
 }

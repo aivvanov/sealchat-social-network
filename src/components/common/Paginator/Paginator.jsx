@@ -1,9 +1,9 @@
 import React from "react";
 import styles from './Paginator.module.css';
 
-const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged}) => {
+const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged}) => {
 
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+    const pagesCount = Math.ceil(totalItemsCount / pageSize);
     const startPage = Math.max(currentPage - 2, 1);
     const endPage = Math.min(currentPage + 2, pagesCount);
 
