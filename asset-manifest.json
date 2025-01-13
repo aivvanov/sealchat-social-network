@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/sealchat-social-network/static/css/main.c8166746.css",
+    "main.js": "/sealchat-social-network/static/js/main.1f2155c9.js",
+    "static/js/453.da11ecde.chunk.js": "/sealchat-social-network/static/js/453.da11ecde.chunk.js",
+    "static/css/46.74512c76.chunk.css": "/sealchat-social-network/static/css/46.74512c76.chunk.css",
+    "static/js/46.5e7a7866.chunk.js": "/sealchat-social-network/static/js/46.5e7a7866.chunk.js",
+    "static/css/979.f9e99c0f.chunk.css": "/sealchat-social-network/static/css/979.f9e99c0f.chunk.css",
+    "static/js/979.c1d2822e.chunk.js": "/sealchat-social-network/static/js/979.c1d2822e.chunk.js",
+    "static/media/pexels_profile_background.jpg": "/sealchat-social-network/static/media/pexels_profile_background.ee50e35ef13347bdf6cf.jpg",
+    "static/media/seals_header.svg": "/sealchat-social-network/static/media/seals_header.62f455830b699a1419cf090eb0574fc1.svg",
+    "static/media/ripple_loader.svg": "/sealchat-social-network/static/media/ripple_loader.db4448a2b5c691e6035bc1f62a572b52.svg",
+    "index.html": "/sealchat-social-network/index.html",
+    "main.c8166746.css.map": "/sealchat-social-network/static/css/main.c8166746.css.map",
+    "main.1f2155c9.js.map": "/sealchat-social-network/static/js/main.1f2155c9.js.map",
+    "453.da11ecde.chunk.js.map": "/sealchat-social-network/static/js/453.da11ecde.chunk.js.map",
+    "46.74512c76.chunk.css.map": "/sealchat-social-network/static/css/46.74512c76.chunk.css.map",
+    "46.5e7a7866.chunk.js.map": "/sealchat-social-network/static/js/46.5e7a7866.chunk.js.map",
+    "979.f9e99c0f.chunk.css.map": "/sealchat-social-network/static/css/979.f9e99c0f.chunk.css.map",
+    "979.c1d2822e.chunk.js.map": "/sealchat-social-network/static/js/979.c1d2822e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c8166746.css",
+    "static/js/main.1f2155c9.js"
+  ]
+}
