@@ -67,7 +67,7 @@ const AppContainer = compose(
   connect(mapStateToProps, { initializeApp }))(App);
 
 const SealChatApp = (props) => {
-  return <BrowserRouter>
+  return <BrowserRouter basename='/'>
     <React.StrictMode>
       <Provider store={store}>
         <AppContainer />
