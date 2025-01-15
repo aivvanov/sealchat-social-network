@@ -7,16 +7,26 @@ import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
+    refrashProfile() {
         this.props.getUserProfile(this.props.router.params.userId);
         this.props.getStatus(this.props.router.params.userId);
     }
 
+    componentDidMount() {
+        this.refrashProfile();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.router.params.userId !== prevProps.router.params.userId) {
+            this.refrashProfile();
+        }
+    }
+
     render() {
-        return <Profile 
-            {...this.props} 
-            profile={this.props.profile} 
-            status={this.props.status} 
+        return <Profile
+            {...this.props}
+            profile={this.props.profile}
+            status={this.props.status}
             updateStatus={this.props.updateStatus}
             authUserId={this.props.authUserId}
             isAuth={this.props.isAuth}
