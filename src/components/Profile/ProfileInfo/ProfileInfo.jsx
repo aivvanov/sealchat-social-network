@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import { createLink } from "../../common/FormsControls/FormsControls";
 
-const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId }) => {
+const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwner, savePhoto }) => {
 
     const createAppLink = (profile) => {
         if (!profile.contacts) {
@@ -34,6 +34,12 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId }) => {
         return <Loader />
     }
 
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
+
     return (
         <div className={styles.main_div}>
             <img
@@ -54,6 +60,7 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId }) => {
                         alt="profile_picture"
                     />
                 }
+                { isOwner && <input type="file" onChange={onMainPhotoSelected} /> }
                 <div className={styles.user_name}>{profile.fullName}</div>
                 {/* <ProfileStatus status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} /> */}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} />
