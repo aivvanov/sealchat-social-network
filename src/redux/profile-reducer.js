@@ -4,6 +4,7 @@ const ADD_POST = 'sealchat/profile/ADD-POST';
 const GET_USER_PROFILE = 'sealchat/profile/GET-USER-PROFILE';
 const SET_STATUS = "sealchat/profile/SET-STATUS";
 const DELETE_POST = "sealchat/profile/DELETE-POST";
+const SAVE_PHOTO_SUCCESS = "sealchat/profile/SAVE-PHOTO-SUCCESS";
 
 const initialState = {
     posts: [
@@ -54,6 +55,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: state.posts.filter(p => p.id !== action.postId)
             }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: { ...state.profile, photos: { ...state.profile.photos, large: action.photos } }
+            }
         default:
             return state;
     }
@@ -63,6 +69,7 @@ export const addPost = (newPostBody) => ({ type: ADD_POST, newPostBody });
 export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
+export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
 
 export const getStatus = (userId) => {
     return (dispatch) => {
@@ -97,6 +104,17 @@ export const updateStatus = (status) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+    debugger
+    const response = await profileAPI.savePhoto(file);
+
+    // if (response.data.resultCode === 0) {
+    //     dispatch(savePhotoSuccess(response.data.data.photos));
+    // }
+    dispatch(savePhotoSuccess(response.data.data.photos));
+    debugger
 }
 
 export const getUserProfile = (userId) => {
