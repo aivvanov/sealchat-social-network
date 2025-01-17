@@ -119,3 +119,26 @@
   padding: 0 10px;
   font-style: italic;
 }
+
+.profile_picture_container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile_picture_container:hover .upload_overlay {
+  opacity: 1;
+}
+
+.upload_overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 0 0 50% 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}

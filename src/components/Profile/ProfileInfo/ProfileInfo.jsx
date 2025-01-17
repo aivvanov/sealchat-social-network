@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./ProfileInfo.module.css";
 import Loader from "../../common/Loader/Loader";
 import profileBackground from '../../../assets/images/pexels_profile_background.jpg'
@@ -8,6 +8,7 @@ import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import { createLink } from "../../common/FormsControls/FormsControls";
 
 const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwner, savePhoto }) => {
+    const fileInputRef = useRef(null);
 
     const createAppLink = (profile) => {
         if (!profile.contacts) {
@@ -40,6 +41,12 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
         }
     }
 
+    const onPhotoClick = () => {
+        if (isOwner) {
+            fileInputRef.current.click();
+        }
+    }
+
     return (
         <div className={styles.main_div}>
             <img
@@ -48,19 +55,28 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
                 alt="background_image"
             />
             <div className={styles.user_info}>
-                {profile.photos.large
-                    ? <img
-                        className={styles.profile_picture}
-                        src={profile.photos.large}
-                        alt="profile_picture"
-                    />
-                    : <img
-                        className={styles.profile_picture}
-                        src={defaultProfilePicture}
-                        alt="profile_picture"
-                    />
-                }
-                { isOwner && <input type="file" onChange={onMainPhotoSelected} /> }
+                <div className={styles.profile_picture_container} onClick={onPhotoClick}>
+                    {profile.photos.large
+                        ? <img
+                            className={styles.profile_picture}
+                            src={profile.photos.large}
+                            alt="profile_picture"
+                        />
+                        : <img
+                            className={styles.profile_picture}
+                            src={defaultProfilePicture}
+                            alt="profile_picture"
+                        />
+                    }
+                    {/* { isOwner && <input type="file" onChange={onMainPhotoSelected} /> } */}
+                    {isOwner && <div className={styles.upload_overlay}>Change Photo</div>}
+                </div>
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={onMainPhotoSelected}
+                />
                 <div className={styles.user_name}>{profile.fullName}</div>
                 {/* <ProfileStatus status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} /> */}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} />
