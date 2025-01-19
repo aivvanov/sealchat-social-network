@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./ProfileInfo.module.css";
 import Loader from "../../common/Loader/Loader";
 import profileBackground from '../../../assets/images/pexels_profile_background.jpg'
@@ -6,26 +6,13 @@ import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
 import { Navigate } from "react-router-dom";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import { createLink } from "../../common/FormsControls/FormsControls";
+import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwner, savePhoto }) => {
+
+    const [editMode, setEditMode] = useState(false);
+
     const fileInputRef = useRef(null);
-
-    const createAppLink = (profile) => {
-        if (!profile.contacts) {
-            return null;
-        }
-
-        const links = [];
-        for (var key in profile.contacts) {
-            if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
-                const linkAdress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
-                if (linkAdress) {
-                    links.push(createLink(profile, key, linkAdress));
-                }
-            }
-        }
-        return links.length ? links : null;
-    }
 
     if (!isAuth) {
         return <Navigate to='/login' />
@@ -68,7 +55,6 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
                             alt="profile_picture"
                         />
                     }
-                    {/* { isOwner && <input type="file" onChange={onMainPhotoSelected} /> } */}
                     {isOwner && <div className={styles.upload_overlay}>Change Photo</div>}
                 </div>
                 <input
@@ -77,28 +63,56 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
                     style={{ display: "none" }}
                     onChange={onMainPhotoSelected}
                 />
-                <div className={styles.user_name}>{profile.fullName}</div>
                 {/* <ProfileStatus status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} /> */}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} />
-                <div className={styles.social_links}>
-                    {createAppLink(profile)}
-                </div>
-                <div className={styles.job_info}>
-                    <div className={`${styles.job_status} ${profile.lookingForAJob ? styles.looking_for_job : styles.not_looking_for_job}`}>
-                        <span className={styles.job_icon}>
-                            {profile.lookingForAJob ? "🔍" : "✔️"}
-                        </span>
-                        {profile.lookingForAJob ? "Actively looking for a job" : "Not looking for a job"}
-                    </div>
-                    {profile.lookingForAJob && (
-                        <div className={styles.job_description}>
-                            <strong>Desired Job Description:</strong> {profile.lookingForAJobDescription}
-                        </div>
-                    )}
-                </div>
+                {!editMode ? <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => { setEditMode(true) }} /> : <ProfileDataForm profile={profile} />}
             </div>
         </div>
     );
 };
+
+export const ProfileData = ({ profile, isOwner, goToEditMode }) => {
+
+    const createAppLink = (profile) => {
+        if (!profile.contacts) {
+            return null;
+        }
+
+        const links = [];
+        for (var key in profile.contacts) {
+            if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
+                const linkAdress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
+                if (linkAdress) {
+                    links.push(createLink(profile, key, linkAdress));
+                }
+            }
+        }
+        return links.length ? links : null;
+    }
+
+    return <div>
+        <div>
+            {isOwner && <div><button onClick={goToEditMode}>Edit</button></div>}
+        </div>
+        <div className={styles.user_name}>{profile.fullName}</div>
+        <div>{profile.aboutMe && `About me: ${profile.aboutMe}`}</div>
+        <div className={styles.social_links}>
+            {createAppLink(profile)}
+        </div>
+        <div className={styles.job_info}>
+            <div className={`${styles.job_status} ${profile.lookingForAJob ? styles.looking_for_job : styles.not_looking_for_job}`}>
+                <span className={styles.job_icon}>
+                    {profile.lookingForAJob ? "🔍" : "✔️"}
+                </span>
+                {profile.lookingForAJob ? "Actively looking for a job" : "Not looking for a job"}
+            </div>
+            {profile.lookingForAJob && (
+                <div className={styles.job_description}>
+                    <strong>Desired Job Description:</strong> {profile.lookingForAJobDescription}
+                </div>
+            )}
+        </div>
+    </div>
+}
 
 export default ProfileInfo;
