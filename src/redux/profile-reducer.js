@@ -5,6 +5,7 @@ const GET_USER_PROFILE = 'sealchat/profile/GET-USER-PROFILE';
 const SET_STATUS = "sealchat/profile/SET-STATUS";
 const DELETE_POST = "sealchat/profile/DELETE-POST";
 const SAVE_PHOTO_SUCCESS = "sealchat/profile/SAVE-PHOTO-SUCCESS";
+const SAVE_PROFILE_SUCCESS = "sealchat/profile/SAVE-PROFILE-SUCCESS";
 
 const initialState = {
     posts: [
@@ -70,6 +71,8 @@ export const getUserProfileSuccess = (profile) => ({ type: GET_USER_PROFILE, pro
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
+export const saveProfileSuccess = (profile) => ({ type: SAVE_PROFILE_SUCCESS, profile });
+
 
 export const getStatus = (userId) => {
     return (dispatch) => {
@@ -111,6 +114,14 @@ export const savePhoto = (file) => async (dispatch) => {
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const saveProfile = (profile) => async (dispatch) => {
+    const response = await profileAPI.saveProfile(profile);
+
+    if (response.data.resultCode === 0) {
+        dispatch(saveProfileSuccess(response.data.data.profile));
     }
 }
 
