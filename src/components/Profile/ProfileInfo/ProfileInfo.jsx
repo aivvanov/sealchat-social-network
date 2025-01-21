@@ -6,9 +6,9 @@ import defaultProfilePicture from '../../../assets/images/userPhoto.jpeg';
 import { Navigate } from "react-router-dom";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import { createLink } from "../../common/FormsControls/FormsControls";
-import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataFormReduxForm from "./ProfileDataForm";
 
-const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwner, savePhoto }) => {
+const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwner, savePhoto, saveProfile }) => {
 
     const [editMode, setEditMode] = useState(false);
 
@@ -22,6 +22,23 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
         return <Loader />
     }
 
+    const createAppLink = (profile) => {
+        if (!profile.contacts) {
+            return null;
+        }
+
+        const links = [];
+        for (var key in profile.contacts) {
+            if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
+                const linkAdress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
+                if (linkAdress) {
+                    links.push(createLink(profile, key, linkAdress));
+                }
+            }
+        }
+        return links.length ? links : null;
+    }
+
     const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0]);
@@ -33,6 +50,50 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
             fileInputRef.current.click();
         }
     }
+
+    const onSubmit = (formData) => {
+        const transformedData = transformData(formData);
+        console.log(transformedData);
+        saveProfile(transformedData)
+            // .then(() => setEditMode(false));
+    }
+
+    const transformData = (input) => {
+        const defaultFields = {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
+        };
+
+        const {
+            aboutMe = null,
+            lookingForAJob = null,
+            lookingForAJobDescription = null,
+            fullName = null,
+            userId = null,
+            contacts = {}
+        } = input;
+
+        const completeContacts = Object.keys(defaultFields).reduce((acc, key) => {
+            const value = contacts[key];
+            acc[key] = value === "" ? null : value ?? null;
+            return acc;
+        }, {});
+
+        return {
+            aboutMe: aboutMe === "" ? null : aboutMe,
+            contacts: completeContacts,
+            lookingForAJob,
+            lookingForAJobDescription: lookingForAJobDescription === "" ? null : lookingForAJobDescription,
+            fullName: fullName === "" ? null : fullName,
+            userId
+        };
+    };
 
     return (
         <div className={styles.main_div}>
@@ -65,30 +126,16 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
                 />
                 {/* <ProfileStatus status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} /> */}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus} authUserId={authUserId} profile={profile} />
-                {!editMode ? <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => { setEditMode(true) }} /> : <ProfileDataForm profile={profile} />}
+                {editMode
+                    ? <ProfileDataFormReduxForm profile={profile} initialValues={profile} onSubmit={onSubmit} />
+                    : <ProfileData profile={profile} isOwner={isOwner} createAppLink={createAppLink} goToEditMode={() => { setEditMode(true) }} />
+                }
             </div>
         </div>
     );
 };
 
-export const ProfileData = ({ profile, isOwner, goToEditMode }) => {
-
-    const createAppLink = (profile) => {
-        if (!profile.contacts) {
-            return null;
-        }
-
-        const links = [];
-        for (var key in profile.contacts) {
-            if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
-                const linkAdress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
-                if (linkAdress) {
-                    links.push(createLink(profile, key, linkAdress));
-                }
-            }
-        }
-        return links.length ? links : null;
-    }
+export const ProfileData = ({ profile, isOwner, goToEditMode, createAppLink }) => {
 
     return <div>
         <div>

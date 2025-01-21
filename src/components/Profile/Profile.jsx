@@ -8,6 +8,7 @@ const Profile = (props) => {
   return (
     <div className={styles.content}>
       <ProfileInfo
+        saveProfile={props.saveProfile}
         savePhoto={props.savePhoto}
         isOwner={props.isOwner}
         profile={props.profile}
