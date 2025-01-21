@@ -52,8 +52,48 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
     }
 
     const onSubmit = (formData) => {
-        saveProfile(formData).then(() => setEditMode(false));
+        const transformedData = transformData(formData);
+        console.log(transformedData);
+        saveProfile(transformedData)
+            // .then(() => setEditMode(false));
     }
+
+    const transformData = (input) => {
+        const defaultFields = {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
+        };
+
+        const {
+            aboutMe = null,
+            lookingForAJob = null,
+            lookingForAJobDescription = null,
+            fullName = null,
+            userId = null,
+            contacts = {}
+        } = input;
+
+        const completeContacts = Object.keys(defaultFields).reduce((acc, key) => {
+            const value = contacts[key];
+            acc[key] = value === "" ? null : value ?? null;
+            return acc;
+        }, {});
+
+        return {
+            aboutMe: aboutMe === "" ? null : aboutMe,
+            contacts: completeContacts,
+            lookingForAJob,
+            lookingForAJobDescription: lookingForAJobDescription === "" ? null : lookingForAJobDescription,
+            fullName: fullName === "" ? null : fullName,
+            userId
+        };
+    };
 
     return (
         <div className={styles.main_div}>
