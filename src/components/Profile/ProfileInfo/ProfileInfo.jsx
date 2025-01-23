@@ -53,10 +53,14 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
 
     const onSubmit = (formData) => {
         const transformedData = transformData(formData);
-        console.log(transformedData);
         saveProfile(transformedData)
-            // .then(() => setEditMode(false));
-    }
+            .then(() => {
+                setEditMode(false);
+            })
+            .catch((error) => {
+                console.error("Ошибка при сохранении профиля:", error);
+            });
+    };
 
     const transformData = (input) => {
         const defaultFields = {
