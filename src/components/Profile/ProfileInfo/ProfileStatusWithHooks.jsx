@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileInfo.module.css";
+import { FaPen } from "react-icons/fa";
 
 const ProfileStatusWithHooks = ({ authUserId, updateStatus, profile, ...props }) => {
 
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status);
+    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
-        setStatus(props.status)
+        setStatus(props.status);
     }, [props.status]);
 
     const activateEditMode = () => {
@@ -23,16 +25,33 @@ const ProfileStatusWithHooks = ({ authUserId, updateStatus, profile, ...props })
         setStatus(e.currentTarget.value);
     }
 
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    }
+
     return (
-        <div>
+        <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
             {authUserId === profile.userId
                 ?
                 <div>
                     {!editMode &&
                         <div
-                            onDoubleClick={activateEditMode}
+                            onClick={activateEditMode}
                             className={styles.user_description}>
                             {props.status || <div className={styles.no_status_text}>Set status... ✍️</div>}
+                            {(isHovered && props.status) && (
+                                <FaPen
+                                    className={styles.edit_icon}
+                                    onClick={activateEditMode}
+                                />
+                            )}
                         </div>
                     }
                     {editMode &&
