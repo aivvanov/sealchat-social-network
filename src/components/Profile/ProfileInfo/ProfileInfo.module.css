@@ -1,29 +1,28 @@
 .main_div {
-  background-color: #f0f4f8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
+  background-color: #f5f7fa;
+  padding: 20px;
 }
 
 .background_image {
   width: 100%;
-  height: 500px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
 }
 
 .user_info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -350px;
   background-color: #ffffff;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 20px;
-  max-width: 600px;
-  width: 100%;
+  margin-top: -150px;
+  text-align: center;
+}
+
+.profile_picture_container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
 .profile_picture {
@@ -32,7 +31,43 @@
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #ffffff;
-  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.profile_picture_container:hover .profile_picture {
+  transform: scale(1.05);
+}
+
+.upload_overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 0 0 50% 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile_picture_container:hover .upload_overlay {
+  opacity: 1;
+}
+
+.edit_button {
+  background-color: #2d47d9;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit_button:hover {
+  background-color: #1c34a5;
 }
 
 .user_name {
@@ -42,39 +77,28 @@
   margin-bottom: 10px;
 }
 
-.user_description {
+.about_me {
   font-size: 16px;
   color: #4a4a4a;
-  text-align: center;
-  margin-bottom: 15px;
-  padding: 0 10px;
+  margin-bottom: 10px;
 }
 
 .social_links {
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .job_info {
-  margin-top: 15px;
   text-align: center;
-  color: #4a4a4a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
 }
 
 .job_status {
   font-size: 16px;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 10px 15px;
   border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  max-width: fit-content;
 }
 
 .looking_for_job {
@@ -87,58 +111,60 @@
   color: #388e3c;
 }
 
-.job_icon {
-  font-size: 18px;
-}
-
-.status_input {
+.user_description {
+  position: relative;
   font-size: 16px;
-  padding: 10px 0px 10px;
-  margin-bottom: 10px;
-  border: 1px solid #cfd8dc;
-  border-radius: 4px;
-  outline: none;
-  width: 100%;
-  max-width: 100%;
-  text-align: center;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.2s, box-shadow 0.2s;
-  min-width: 350px;
+  color: #4a4a4a;
+  cursor: pointer;
+  padding-bottom: 10px;
 }
 
-.status_input:focus {
-  border-color: #2d47d9;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+.edit_icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #2d47d9;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.user_description:hover .edit_icon {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.status_text input {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .no_status_text {
-  font-size: 16px;
-  color: #4a4a4a;
-  text-align: center;
-  margin-bottom: 15px;
-  padding: 0 10px;
-  font-style: italic;
+  font-size: 14px;
+  color: #bbb;
 }
 
-.profile_picture_container {
-  position: relative;
+.edit_icon {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #2d47d9;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
   cursor: pointer;
 }
 
-.profile_picture_container:hover .upload_overlay {
-  opacity: 1;
-}
-
-.upload_overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 0 0 50% 50%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.job_description {
+  font-size: 16px;
+  color: #4a4a4a;
+  margin-top: 10px;
 }
