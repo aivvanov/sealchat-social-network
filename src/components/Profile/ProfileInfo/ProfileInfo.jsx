@@ -147,7 +147,7 @@ export const ProfileData = ({ profile, isOwner, goToEditMode, createAppLink }) =
             )}
             <h2 className={styles.user_name}>{profile.fullName}</h2>
             {profile.aboutMe && <p className={styles.about_me}>
-                <strong>About me:</strong>{profile.aboutMe}</p>}
+                <strong>About me: </strong>{profile.aboutMe}</p>}
             <div className={styles.social_links}>{createAppLink(profile)}</div>
             <div className={styles.job_info}>
                 <div
