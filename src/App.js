@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import './App.css';
 import Info from './components/Info/Info';
 import News from './components/News/News';
@@ -16,7 +16,6 @@ import { initializeApp } from './redux/app-reducer';
 import Loader from './components/common/Loader/Loader';
 import store from './redux/redux-store';
 import { withSuspense } from './hoc/withSuspense';
-// import { Footer } from './components/Footer/Footer';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const DialogsContainerWithSuspense = withSuspense(DialogsContainer);
@@ -49,14 +48,14 @@ class App extends Component {
             <Route path='/users' element={<UsersContainer />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Navigate to='/profile' />} />
+            <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </div>
-        {/* <Footer /> */}
       </div >
     )
   };
 }
-
 
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized
@@ -75,15 +74,5 @@ const SealChatApp = (props) => {
     </React.StrictMode>
   </BrowserRouter>
 }
-
-// const SealChatApp = (props) => {
-//   return <HashRouter>
-//     <React.StrictMode>
-//       <Provider store={store}>
-//         <AppContainer />
-//       </Provider>
-//     </React.StrictMode>
-//   </HashRouter>
-// }
 
 export default SealChatApp;
