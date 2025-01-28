@@ -24,8 +24,18 @@ const ProfileContainerWithSuspense = withSuspense(ProfileContainer);
 
 
 class App extends Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    // TODO: Add thunk to catch an error
+    console.log(promiseRejectionEvent);
+  }
+
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledRejection", this.catchAllUnhandledErrors);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("unhandledRejection", this.catchAllUnhandledErrors);
   }
 
   render() {
