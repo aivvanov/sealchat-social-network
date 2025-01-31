@@ -1,17 +1,18 @@
 import React from "react";
 import styles from './Posts.module.css';
 import Post from "./Post/Post";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 
-const Posts = React.memo(({ posts, addPost }) => {
+const Posts = React.memo(({ posts, addPost, profile }) => {
 
   const postElements = posts
-    .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id} />);
+    .map(post => <Post message={post.message} likesCount={post.likesCount} key={post.id} profile={profile} />);
 
-  const addNewPost = (value) => {
+  const addNewPost = (value, dispatch) => {
     addPost(value.newPostBody);
+    dispatch(reset("profilePostForm"));
   }
 
   return (
@@ -28,8 +29,11 @@ const Posts = React.memo(({ posts, addPost }) => {
 const PostForm = ({ handleSubmit }) => {
 
   return (
-    <form onSubmit={handleSubmit}
-      className={styles.post_items}>
+    <form onSubmit={(e) => {
+      handleSubmit(e);
+      reset();
+    }}
+      className={styles.post_items} >
       <Field
         component={Textarea}
         name="newPostBody"
@@ -39,7 +43,7 @@ const PostForm = ({ handleSubmit }) => {
       <div>
         <button className={styles.send_button}>Add post</button>
       </div>
-    </form>
+    </form >
   );
 }
 

@@ -1,11 +1,11 @@
 import React from "react";
 import styles from './Post.module.css';
 
-const Post = ({message, likesCount}) => {
+const Post = ({message, likesCount, profile}) => {
     return (
         <div className={styles.item}>
             <img
-                src="https://i0.wp.com/tanhananews.com/wp-content/uploads/2021/07/Ratu-Felisha-Hak-Cipta-Instagramallaboutfelishagtr.jpg?fit=800%2C677&ssl=1"
+                src={profile.photos.small}
                 alt="post_icon"
             />
             {message}
