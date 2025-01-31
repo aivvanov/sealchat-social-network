@@ -8,18 +8,7 @@ const DELETE_POST = "sealchat/profile/DELETE-POST";
 const SAVE_PHOTO_SUCCESS = "sealchat/profile/SAVE-PHOTO-SUCCESS";
 
 const initialState = {
-    posts: [
-        {
-            id: 2,
-            message: "Hello!! how are you guys doing?",
-            likesCount: 10
-        },
-        {
-            id: 1,
-            message: "Just created my new post here!",
-            likesCount: 23
-        }
-    ],
+    posts: [],
     profile: null,
     status: ""
 }
@@ -28,7 +17,7 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            const postId = (state.posts[0].id) + 1;
+            const postId = ((state.posts[0]?.id ?? 0) + 1);
             const post = {
                 id: postId,
                 message: action.newPostBody,

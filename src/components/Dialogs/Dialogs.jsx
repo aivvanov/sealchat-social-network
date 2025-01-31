@@ -2,19 +2,21 @@ import React from "react";
 import styles from "./Dialogs.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 import { Textarea } from "../common/FormsControls/FormsControls";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
 
-const Dialogs = ({ dialogs, messages, sendMessage }) => {
+const Dialogs = ({ dialogs, messages, sendMessage, profile }) => {
     const dialogElements = dialogs
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} key={dialog.id} />);
 
     const messageElements = messages
-        .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt} messageUserInfo={message.user} key={message.id} />);
+        .map(message => <Message messageText={message.text} messageCreatedAt={message.createdAt}
+            messageUserInfo={message.user} key={message.id} profile={profile} />);
 
-    const addNewMessage = (value) => {
-        sendMessage(value.newMessageBody)
+    const addNewMessage = (value, dispatch) => {
+        sendMessage(value.newMessageBody);
+        dispatch(reset("dialogMessageForm"));
     }
 
     return (
@@ -33,7 +35,10 @@ const Dialogs = ({ dialogs, messages, sendMessage }) => {
 
 const MessageForm = ({ handleSubmit }) => {
     return (
-        <form onSubmit={handleSubmit} className={styles.message_field}>
+        <form onSubmit={(e) => {
+            handleSubmit(e);
+            reset();
+        }} className={styles.message_field}>
             <Field
                 component={Textarea}
                 name="newMessageBody"
