@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Dialogs from "./Dialogs";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { getUserProfile } from "../../redux/profile-reducer";
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +15,6 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, { sendMessage }),
+    connect(mapStateToProps, { sendMessage, getUserProfile }),
     withAuthRedirect
 )(Dialogs);

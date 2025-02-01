@@ -120,7 +120,7 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     }
 }
 
-export const getUserProfile = (userId) => {
+export const getUserProfile = (userId = null) => {
     return (dispatch) => {
         if (!userId) {
             authAPI.auth()
