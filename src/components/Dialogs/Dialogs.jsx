@@ -5,8 +5,9 @@ import Message from "./Message/Message";
 import { Field, reduxForm, reset } from "redux-form";
 import { Textarea } from "../common/FormsControls/FormsControls";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
+import Loader from "../common/Loader/Loader";
 
-const Dialogs = ({ dialogs, messages, sendMessage, profile }) => {
+const Dialogs = ({ dialogs, messages, sendMessage, profile, getUserProfile }) => {
     const dialogElements = dialogs
         .map(dialog => <Dialog id={dialog.id} userName={dialog.name} userImage={dialog.icon} key={dialog.id} />);
 
@@ -17,6 +18,11 @@ const Dialogs = ({ dialogs, messages, sendMessage, profile }) => {
     const addNewMessage = (value, dispatch) => {
         sendMessage(value.newMessageBody);
         dispatch(reset("dialogMessageForm"));
+    }
+
+    if (!profile) {
+        getUserProfile();
+        return <Loader />;
     }
 
     return (

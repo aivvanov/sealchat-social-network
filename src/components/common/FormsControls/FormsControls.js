@@ -37,8 +37,13 @@ export const createField = (placeholder, name, validators, component, className,
     />
 }
 
-export const createLink = (profile, LinkType, linkAdress) => {
-    return <a href={`https://${profile.contacts}.${LinkType}`} className={styles.social_link}>
-        <img src={linkAdress} alt={`${LinkType}_link`} />
+export const createLink = (contactLink, LinkType, logoLink) => {
+    if (!contactLink.startsWith("https://")) {
+        return <a href={`https://${contactLink}`} className={styles.social_link}>
+            <img src={logoLink} alt={`${LinkType}_link`} />
+        </a>
+    }
+    return <a href={contactLink} className={styles.social_link}>
+        <img src={logoLink} alt={`${LinkType}_link`} />
     </a>
 }

@@ -28,12 +28,13 @@ const ProfileInfo = ({ isAuth, profile, status, updateStatus, authUserId, isOwne
         const links = [];
         for (const key in profile.contacts) {
             if (profile.contacts.hasOwnProperty(key) && profile.contacts[key] !== null) {
-                const linkAddress = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
-                if (linkAddress) {
-                    links.push(createLink(profile, key, linkAddress));
+                const logoLinks = process.env[`REACT_APP_${key.toUpperCase()}_LOGO_URL`];
+                if (logoLinks) {
+                    links.push(createLink(profile.contacts[key], key, logoLinks));
                 }
             }
         }
+
         return links.length ? links : null;
     };
 
