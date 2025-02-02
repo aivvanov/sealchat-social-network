@@ -1,50 +1,60 @@
 import React from "react";
 import styles from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
-import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers, FaBars, FaTimes } from 'react-icons/fa';
 
-const Navbar = ({ dialogs }) => {
+const Navbar = ({ dialogs, isNavbarCollapsed, toggleNavbar }) => {
   const telegram = process.env.REACT_APP_TELEGRAM;
   const phone = process.env.REACT_APP_PHONE;
   const userImages = dialogs
     .map(image => <img src={image.icon} key={image.id} alt="userImage" />);
 
   return (
-    <nav className={styles.nav}>
-      <h2>Menu</h2>
+    <nav className={`${styles.nav} ${isNavbarCollapsed ? styles.collapsed : ''}`}>
+      <div className={styles.navHeader}>
+        <h2>{isNavbarCollapsed ? 'M' : 'Menu'}</h2>
+        <button 
+          onClick={toggleNavbar} 
+          className={styles.toggleButton}
+          aria-label={isNavbarCollapsed ? 'Expand menu' : 'Collapse menu'}
+        >
+          {isNavbarCollapsed ? <FaBars /> : <FaTimes />}
+        </button>
+      </div>
+      
       <div className={styles.menu_grid}>
         <div className={styles.item}>
           <NavLink to="/profile" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaUser className={styles.icon} />Profile
+            <FaUser className={styles.icon} /><span>Profile</span>
           </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="/dialogs" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaEnvelope className={styles.icon} />Messages
+            <FaEnvelope className={styles.icon} /><span>Messages</span>
           </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="/info" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaInfoCircle className={styles.icon} />Info
+            <FaInfoCircle className={styles.icon} /><span>Info</span>
           </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="/news" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaNewspaper className={styles.icon} />News</NavLink>
+            <FaNewspaper className={styles.icon} /><span>News</span></NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="music" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaMusic className={styles.icon} />Music
+            <FaMusic className={styles.icon} /><span>Music</span>
           </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="users" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaUsers className={styles.icon} />Find users
+            <FaUsers className={styles.icon} /><span>Find users</span>
           </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="settings" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaCog className={styles.icon} />Settings
+            <FaCog className={styles.icon} /><span>Settings</span>
           </NavLink>
         </div>
         <div className={styles.friends_block}>
@@ -52,6 +62,7 @@ const Navbar = ({ dialogs }) => {
           {userImages}
         </div>
       </div>
+
       <div className={styles.info_content}>
         <div className={styles.contact_info}>
           <p className={styles.contact_header}>Contact me</p>
