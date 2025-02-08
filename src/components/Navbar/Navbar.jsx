@@ -1,27 +1,20 @@
 import React from "react";
 import styles from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
-import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers, FaBars, FaTimes } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaInfoCircle, FaMusic, FaCog, FaNewspaper, FaUsers } from 'react-icons/fa';
 
-const Navbar = ({ dialogs, isNavbarCollapsed, toggleNavbar }) => {
+const Navbar = ({ dialogs }) => {
   const telegram = process.env.REACT_APP_TELEGRAM;
   const phone = process.env.REACT_APP_PHONE;
   const userImages = dialogs
     .map(image => <img src={image.icon} key={image.id} alt="userImage" />);
 
   return (
-    <nav className={`${styles.nav} ${isNavbarCollapsed ? styles.collapsed : ''}`}>
+    <nav className={styles.nav}>
       <div className={styles.navHeader}>
-        <h2>{isNavbarCollapsed ? 'M' : 'Menu'}</h2>
-        <button 
-          onClick={toggleNavbar} 
-          className={styles.toggleButton}
-          aria-label={isNavbarCollapsed ? 'Expand menu' : 'Collapse menu'}
-        >
-          {isNavbarCollapsed ? <FaBars /> : <FaTimes />}
-        </button>
+        <h2>Menu</h2>
       </div>
-      
+
       <div className={styles.menu_grid}>
         <div className={styles.item}>
           <NavLink to="/profile" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
@@ -40,7 +33,8 @@ const Navbar = ({ dialogs, isNavbarCollapsed, toggleNavbar }) => {
         </div>
         <div className={styles.item}>
           <NavLink to="/news" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
-            <FaNewspaper className={styles.icon} /><span>News</span></NavLink>
+            <FaNewspaper className={styles.icon} /><span>News</span>
+          </NavLink>
         </div>
         <div className={styles.item}>
           <NavLink to="music" className={({ isActive }) => (isActive ? styles.active_link : styles.link)}>
